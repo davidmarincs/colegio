@@ -186,6 +186,15 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   color: #fff;
   margin: 0;
 }
+.act-divider-sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0.5rem auto 0;
+  line-height: 1.5;
+}
 .act-divider-1 { background: linear-gradient(135deg, #2d6e8a, #5a9bb5); color: #fff; }
 .act-divider-2 { background: linear-gradient(135deg, #5a3d8a, #7c5cbf); color: #fff; }
 .act-divider-3 { background: linear-gradient(135deg, #1a6b4a, #1a9a6b); color: #fff; }
@@ -312,7 +321,14 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   font-size: 1.1rem;
   color: var(--text-secondary);
   max-width: 650px;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+/* Body text blocks inside acts */
+.container > .reveal > p + p {
+  margin-top: 1.2rem;
+}
+.container > .reveal {
+  margin-bottom: 2.5rem;
 }
 
 /* Elephant parable - Scrollytelling */
@@ -1296,12 +1312,12 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <div class="act-divider act-divider-1" id="act-1">
   <p class="act-label">Acto I</p>
   <h2 class="act-divider-title">El ADN</h2>
+  <p class="act-divider-sub">Del paradigma de la simplicidad al paradigma de la complejidad. Así pensamos, así enseñamos.</p>
 </div>
 <section class="act-1">
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">Del paradigma de la simplicidad al paradigma de la complejidad. Así pensamos, así enseñamos.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En el Colegio Santa Gema Galgani llevamos 55 años educando en el barrio de Aluche (Madrid). Nuestro proyecto pedagógico se inspira en el pensamiento complejo de Edgar Morin: creemos que la realidad no se puede entender troceándola en asignaturas aisladas. Los problemas del mundo real &mdash;el cambio climático, las migraciones, la inteligencia artificial&mdash; no pertenecen a una sola disciplina. Por eso, nuestro modelo conecta las materias entre sí a través de proyectos interdisciplinares y seis grandes preguntas que llamamos <em>vías transdisciplinares</em>.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">El objetivo no es acumular conocimiento, sino formar personas capaces de <strong>comprender</strong> la realidad compleja y <strong>comprenderse</strong> a sí mismas para encontrar su lugar en el mundo.</p>
     </div>
@@ -1460,12 +1476,12 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <div class="act-divider act-divider-2" id="act-2">
   <p class="act-label">Acto II</p>
   <h2 class="act-divider-title">La Hipótesis</h2>
+  <p class="act-divider-sub">&iquest;Y si cruzar fronteras nos hace mejores educadores? Erasmus+ como laboratorio de nuestro modelo pedagógico.</p>
 </div>
 <section class="act-2">
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">&iquest;Y si cruzar fronteras nos hace mejores educadores? Erasmus+ como laboratorio de nuestro modelo pedagógico.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En 2022, el SEPIE concedió a Santa Gema la acreditación Erasmus+ (KA120) en el ámbito de Educación Escolar. No fue un punto de llegada sino de partida: nos permitió sistematizar algo que ya intuíamos &mdash;que nuestro modelo pedagógico transdisciplinar necesitaba ser contrastado fuera de nuestras paredes&mdash;. Desde entonces, nos hemos planteado cuatro objetivos que conectan directamente nuestra pedagogía con la dimensión internacional.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Cada objetivo es, en realidad, una pregunta. Y cada movilidad ha sido un intento de responderla con evidencias: 84 alumnos en 9 países, 30 profesores en experiencias de job shadowing y acompañamiento. Los datos que siguen no son números: son historias de aprendizaje que han transformado cómo enseñamos.</p>
     </div>
@@ -1728,12 +1744,12 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <div class="act-divider act-divider-3" id="act-3">
   <p class="act-label">Acto III</p>
   <h2 class="act-divider-title">El Laboratorio</h2>
+  <p class="act-divider-sub">Donde la teoría se hace proyecto. Curso 2025-2026: más de 20 proyectos interdisciplinares en 4 cursos de ESO.</p>
 </div>
 <section class="act-3">
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">Donde la teoría se hace proyecto. Curso 2025-2026: más de 20 proyectos interdisciplinares en 4 cursos de ESO.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En Santa Gema, el currículo de la ESO se organiza en <strong>ámbitos</strong>: STEAM (ciencias, tecnología, ingeniería, arte y matemáticas), CLC (cultura, lenguas clásicas y civilización), EPSGC (English Project Santa Gema &mdash; proyectos íntegramente en inglés) y STEM. Cada ámbito trabaja por unidades que son, en realidad, proyectos interdisciplinares (UBPI) con una pregunta guía, un producto final y una presentación pública.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Lo que hace diferente a estos proyectos es que cada uno está alineado con una de las 6 vías transdisciplinares y, desde que tenemos Erasmus+, también con los ODS y con lo aprendido en las movilidades. Un proyecto sobre sostenibilidad en Aluche ya no se diseña solo desde Madrid: incorpora lo que profesores y alumnos observaron en la Francia rural, en las ciudades bálticas de Lituania o en los talleres de Gotemburgo.</p>
     </div>
@@ -2059,12 +2075,12 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <div class="act-divider act-divider-4" id="act-4">
   <p class="act-label">Acto IV</p>
   <h2 class="act-divider-title">Las Voces</h2>
+  <p class="act-divider-sub">Los que cruzaron fronteras y volvieron con nuevas preguntas.</p>
 </div>
 <section class="act-4">
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">Los que cruzaron fronteras y volvieron con nuevas preguntas.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Detrás de los datos hay personas. Alumnos de 14 años que nunca habían salido de España y descubrieron que un chico lituano tiene las mismas dudas sobre su futuro. Profesores que observaron cómo se enseña en una escuela sueca y volvieron con ideas para transformar sus clases. Familias de Aluche que acogieron a estudiantes franceses y descubrieron que la hospitalidad también es una forma de aprender.</p>
       <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Entre 2024 y 2026, nuestros alumnos y profesores han viajado a Francia (Gourdon, Montpellier, Clermont-l'Hérault), Lituania (Ylakiai), Italia (Génova), Irlanda (Portlaoise), Suecia (Gotemburgo) y Alemania (Fürth). Y hemos recibido a alumnos lituanos en Madrid. Cada movilidad ha dejado un rastro de aprendizajes que se refleja en cómo diseñamos nuestros proyectos.</p>
     </div>
