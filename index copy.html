@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comprender el Mundo — Colegio Santa Gema Galgani · Erasmus+</title>
 <meta name="description" content="Cómo la internacionalización Erasmus+ transformó nuestro modelo pedagógico de pensamiento complejo. Candidatura EITA 2026.">
-<link rel="icon" type="image/png" href="favicon.png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,41 +20,35 @@
    DESIGN TOKENS
    ═══════════════════════════════════════ */
 :root {
-  /* Santa Gema palette — light mode */
-  --bg-deep: #f5f7fa;
-  --bg-primary: #ffffff;
-  --bg-panel: #ffffff;
-  --bg-card: #f0f4f8;
-  --bg-elevated: #e8edf3;
-
-  /* Santa Gema blue (from logo) */
-  --sg-blue: #5a9bb5;
-  --sg-blue-dark: #2d6e8a;
-  --sg-blue-light: #9cc0d3;
-  --sg-blue-bg: #eaf3f7;
+  /* Base palette */
+  --bg-deep: #080d1a;
+  --bg-primary: #0c1222;
+  --bg-panel: #101829;
+  --bg-card: #141e30;
+  --bg-elevated: #1a2540;
 
   /* Text */
-  --text-primary: #1a2a3a;
-  --text-secondary: #4a6275;
-  --text-muted: #8297a8;
+  --text-primary: #e8ecf4;
+  --text-secondary: #8b97b0;
+  --text-muted: #5a6a85;
 
-  /* Accent colors — adapted for light bg */
-  --cyan: #2a8fa6;
-  --cyan-dim: rgba(42, 143, 166, 0.1);
-  --violet: #7c5cbf;
-  --violet-dim: rgba(124, 92, 191, 0.08);
-  --emerald: #1a9a6b;
-  --emerald-dim: rgba(26, 154, 107, 0.08);
-  --amber: #c8890a;
-  --amber-dim: rgba(200, 137, 10, 0.08);
-  --rose: #d44e63;
-  --rose-dim: rgba(212, 78, 99, 0.08);
-  --blue: #3b82c4;
-  --blue-dim: rgba(59, 130, 196, 0.08);
+  /* Accent colors per act */
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34, 211, 238, 0.15);
+  --violet: #a78bfa;
+  --violet-dim: rgba(167, 139, 250, 0.12);
+  --emerald: #34d399;
+  --emerald-dim: rgba(52, 211, 153, 0.12);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251, 191, 36, 0.12);
+  --rose: #fb7185;
+  --rose-dim: rgba(251, 113, 133, 0.12);
+  --blue: #60a5fa;
+  --blue-dim: rgba(96, 165, 250, 0.12);
 
   /* Borders */
-  --ring: rgba(0,0,0,0.08);
-  --ring-accent: rgba(90, 155, 181, 0.3);
+  --ring: rgba(255,255,255,0.06);
+  --ring-accent: rgba(34, 211, 238, 0.2);
 
   /* Typography */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -80,7 +73,7 @@ body {
   overflow-x: hidden;
 }
 img { max-width: 100%; display: block; }
-a { color: var(--sg-blue-dark); text-decoration: none; }
+a { color: var(--cyan); text-decoration: none; }
 
 /* ═══════════════════════════════════════
    NAVIGATION
@@ -96,12 +89,10 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   transition: background 0.4s, backdrop-filter 0.4s;
 }
 .nav.scrolled {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(8, 13, 26, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--ring);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
 }
-.nav-logo { height: 32px; width: auto; border-radius: 4px; }
 .nav-brand {
   font-family: var(--font-body);
   font-weight: 600;
@@ -128,7 +119,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   position: absolute;
   bottom: -4px; left: 0;
   width: 0; height: 2px;
-  background: var(--sg-blue);
+  background: var(--cyan);
   transition: width 0.3s;
 }
 .nav-links a:hover { color: var(--text-primary); }
@@ -141,7 +132,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   position: fixed;
   top: 0; left: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--sg-blue), var(--violet), var(--emerald), var(--amber));
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--emerald), var(--amber));
   z-index: 101;
   width: 0%;
   transition: width 0.1s;
@@ -164,34 +155,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 .reveal { opacity: 0; transform: translateY(40px); }
 .reveal.active { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
 
-/* Act dividers — full-width visual breaks */
-.act-divider {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 3rem 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.act-divider .act-label {
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  margin-bottom: 0.3rem;
-  opacity: 0.8;
-}
-.act-divider .act-divider-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 400;
-  color: #fff;
-  margin: 0;
-}
-.act-divider-1 { background: linear-gradient(135deg, #2d6e8a, #5a9bb5); color: #fff; }
-.act-divider-2 { background: linear-gradient(135deg, #5a3d8a, #7c5cbf); color: #fff; }
-.act-divider-3 { background: linear-gradient(135deg, #1a6b4a, #1a9a6b); color: #fff; }
-.act-divider-4 { background: linear-gradient(135deg, #8a5a0a, #c8890a); color: #fff; }
-.act-divider-5 { background: linear-gradient(135deg, #1a3a4a, #2d6e8a); color: #fff; }
-
 /* ═══════════════════════════════════════
    ACTO 0 — OBERTURA
    ═══════════════════════════════════════ */
@@ -205,8 +168,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   position: relative;
   overflow: hidden;
   padding: 2rem;
-  background: linear-gradient(160deg, #1a3a4a 0%, #2d6e8a 40%, #1a3a4a 100%);
-  color: #e8f0f4;
 }
 .act-0-canvas {
   position: absolute;
@@ -223,7 +184,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   font-family: var(--font-display);
   font-style: italic;
   font-size: clamp(1rem, 2.5vw, 1.35rem);
-  color: rgba(255,255,255,0.6);
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
   opacity: 0;
   animation: fadeUp 1.5s ease 0.5s forwards;
@@ -237,10 +198,10 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   opacity: 0;
   animation: fadeUp 1.5s ease 1s forwards;
 }
-.obertura-quote em { color: var(--sg-blue-light); font-style: normal; }
+.obertura-quote em { color: var(--cyan); font-style: normal; }
 .obertura-subtitle {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: rgba(255,255,255,0.7);
+  color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto 3rem;
   opacity: 0;
@@ -254,9 +215,8 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   border: 1px solid var(--ring-accent);
   border-radius: 999px;
   font-size: 0.85rem;
-  color: var(--sg-blue-light);
-  background: rgba(156, 192, 211, 0.15);
-  border-color: rgba(156, 192, 211, 0.3);
+  color: var(--cyan);
+  background: var(--cyan-dim);
   opacity: 0;
   animation: fadeUp 1s ease 2s forwards;
   margin-bottom: 4rem;
@@ -266,7 +226,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255,255,255,0.4);
+  color: var(--text-muted);
   font-size: 0.7rem;
   display: flex;
   flex-direction: column;
@@ -277,7 +237,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 }
 .scroll-hint-line {
   width: 1px; height: 40px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
 }
 
 @keyframes fadeUp {
@@ -391,15 +351,15 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 .elephant-part.revealed {
   opacity: 1;
   transform: translateY(0);
-  border-color: var(--sg-blue);
+  border-color: var(--cyan);
   color: var(--text-primary);
-  box-shadow: 0 4px 20px rgba(90, 155, 181, 0.15);
+  box-shadow: 0 0 30px var(--cyan-dim);
 }
 .elephant-whole {
   width: 180px; height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--sg-blue-bg), transparent 70%);
-  border: 2px solid var(--sg-blue);
+  background: radial-gradient(circle, var(--cyan-dim), transparent 70%);
+  border: 2px solid var(--cyan);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -631,6 +591,13 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   padding: var(--section-pad) 0;
   position: relative;
 }
+.act-2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet), transparent);
+}
 
 .questions-grid {
   display: grid;
@@ -824,6 +791,13 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   padding: var(--section-pad) 0;
   position: relative;
 }
+.act-3::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+}
 
 /* Project filters */
 .filters {
@@ -970,6 +944,13 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 .act-4 {
   padding: var(--section-pad) 0;
   position: relative;
+}
+.act-4::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
 }
 
 /* Timeline */
@@ -1128,7 +1109,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   width: 100%; height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease, filter 0.6s ease;
-  filter: brightness(0.95) saturate(0.95);
+  filter: brightness(0.85) saturate(0.9);
 }
 .gallery-item:hover img {
   transform: scale(1.05);
@@ -1138,7 +1119,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   position: absolute;
   bottom: 0; left: 0; right: 0;
   padding: 2.5rem 1rem 1rem;
-  background: linear-gradient(to top, rgba(26,42,58,0.85), transparent);
+  background: linear-gradient(to top, rgba(8,13,26,0.9), transparent);
   font-size: 0.8rem;
   color: var(--text-secondary);
   transform: translateY(100%);
@@ -1160,8 +1141,13 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, #1a3a4a 0%, #2d6e8a 40%, #1a3a4a 100%);
-  color: #e8f0f4;
+}
+.act-5::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
 }
 .coda-content {
   text-align: center;
@@ -1176,7 +1162,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   line-height: 1.4;
   margin-bottom: 2rem;
 }
-.coda-quote em { color: var(--sg-blue-light); font-style: normal; }
+.coda-quote em { color: var(--cyan); font-style: normal; }
 .coda-credits {
   display: flex;
   flex-direction: column;
@@ -1198,9 +1184,9 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 }
 .coda-school {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.55);
+  color: var(--text-secondary);
 }
-.coda-school a { color: var(--sg-blue-light); }
+.coda-school a { color: var(--cyan); }
 .coda-ids {
   font-size: 0.75rem;
   color: var(--text-muted);
@@ -1251,10 +1237,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
 <nav class="nav" id="mainNav">
-  <div class="nav-brand" style="display:flex; align-items:center; gap:0.5rem;">
-    <img src="assets/img/logo.png" alt="Logo Santa Gema" class="nav-logo">
-    <span>Santa Gema &middot; Erasmus+</span>
-  </div>
+  <div class="nav-brand">Santa Gema &middot; Erasmus+</div>
   <ul class="nav-links">
     <li><a href="#act-0">Inicio</a></li>
     <li><a href="#act-1">El ADN</a></li>
@@ -1293,17 +1276,15 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <!-- ═══════════════════════════════════════
      ACTO 1 — EL ADN
      ═══════════════════════════════════════ -->
-<div class="act-divider act-divider-1" id="act-1">
-  <p class="act-label">Acto I</p>
-  <h2 class="act-divider-title">El ADN</h2>
-</div>
-<section class="act-1">
+<section class="act-1" id="act-1">
   <div class="container">
 
-    <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">Del paradigma de la simplicidad al paradigma de la complejidad. Así pensamos, así enseñamos.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En el Colegio Santa Gema Galgani llevamos 55 años educando en el barrio de Aluche (Madrid). Nuestro proyecto pedagógico se inspira en el pensamiento complejo de Edgar Morin: creemos que la realidad no se puede entender troceándola en asignaturas aisladas. Los problemas del mundo real &mdash;el cambio climático, las migraciones, la inteligencia artificial&mdash; no pertenecen a una sola disciplina. Por eso, nuestro modelo conecta las materias entre sí a través de proyectos interdisciplinares y seis grandes preguntas que llamamos <em>vías transdisciplinares</em>.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">El objetivo no es acumular conocimiento, sino formar personas capaces de <strong>comprender</strong> la realidad compleja y <strong>comprenderse</strong> a sí mismas para encontrar su lugar en el mundo. Rigor, apertura y tolerancia son nuestros tres valores fundamentales.</p>
+    <!-- Section header -->
+    <div class="reveal">
+      <p class="act-label" style="color: var(--cyan);">Acto I</p>
+      <h2 class="act-title">El ADN</h2>
+      <p class="act-subtitle">Del paradigma de la simplicidad al paradigma de la complejidad. Así pensamos, así enseñamos.</p>
+      <div class="accent-line" style="background: var(--cyan);"></div>
     </div>
 
     <!-- Elephant parable - Scrollytelling -->
@@ -1457,17 +1438,14 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <!-- ═══════════════════════════════════════
      ACTO 2 — LA HIPÓTESIS
      ═══════════════════════════════════════ -->
-<div class="act-divider act-divider-2" id="act-2">
-  <p class="act-label">Acto II</p>
-  <h2 class="act-divider-title">La Hipótesis</h2>
-</div>
-<section class="act-2">
+<section class="act-2" id="act-2">
   <div class="container">
 
-    <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">&iquest;Y si cruzar fronteras nos hace mejores educadores? Erasmus+ como laboratorio de nuestro modelo pedagógico.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En 2022, el SEPIE concedió a Santa Gema la acreditación Erasmus+ (KA120) en el ámbito de Educación Escolar. No fue un punto de llegada sino de partida: nos permitió sistematizar algo que ya intuíamos &mdash;que nuestro modelo pedagógico transdisciplinar necesitaba ser contrastado fuera de nuestras paredes&mdash;. Desde entonces, nos hemos planteado cuatro objetivos que conectan directamente nuestra pedagogía con la dimensión internacional.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Cada objetivo es, en realidad, una pregunta. Y cada movilidad ha sido un intento de responderla con evidencias: 84 alumnos en 9 países, 30 profesores en experiencias de job shadowing y acompañamiento. Los datos que siguen no son números: son historias de aprendizaje que han transformado cómo enseñamos.</p>
+    <div class="reveal">
+      <p class="act-label" style="color: var(--violet);">Acto II</p>
+      <h2 class="act-title">La Hipótesis</h2>
+      <p class="act-subtitle">&iquest;Y si cruzar fronteras nos hace mejores educadores? Erasmus+ como laboratorio de nuestro modelo pedagógico.</p>
+      <div class="accent-line" style="background: var(--violet);"></div>
     </div>
 
     <!-- 4 Questions -->
@@ -1725,17 +1703,14 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <!-- ═══════════════════════════════════════
      ACTO 3 — EL LABORATORIO
      ═══════════════════════════════════════ -->
-<div class="act-divider act-divider-3" id="act-3">
-  <p class="act-label">Acto III</p>
-  <h2 class="act-divider-title">El Laboratorio</h2>
-</div>
-<section class="act-3">
+<section class="act-3" id="act-3">
   <div class="container">
 
-    <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">Donde la teoría se hace proyecto. Curso 2025-2026: más de 20 proyectos interdisciplinares en 4 cursos de ESO.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En Santa Gema, el currículo de la ESO se organiza en <strong>ámbitos</strong>: STEAM (ciencias, tecnología, ingeniería, arte y matemáticas), CLC (cultura, lenguas clásicas y civilización), EPSGC (English Project Santa Gema &mdash; proyectos íntegramente en inglés) y STEM. Cada ámbito trabaja por unidades que son, en realidad, proyectos interdisciplinares (UBPI) con una pregunta guía, un producto final y una presentación pública.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Lo que hace diferente a estos proyectos es que cada uno está alineado con una de las 6 vías transdisciplinares y, desde que tenemos Erasmus+, también con los ODS y con lo aprendido en las movilidades. Un proyecto sobre sostenibilidad en Aluche ya no se diseña solo desde Madrid: incorpora lo que profesores y alumnos observaron en la Francia rural, en las ciudades bálticas de Lituania o en los talleres de Gotemburgo.</p>
+    <div class="reveal">
+      <p class="act-label" style="color: var(--emerald);">Acto III</p>
+      <h2 class="act-title">El Laboratorio</h2>
+      <p class="act-subtitle">Donde la teoría se hace proyecto. Curso 2025-2026: más de 20 proyectos interdisciplinares en 4 cursos de ESO.</p>
+      <div class="accent-line" style="background: var(--emerald);"></div>
     </div>
 
     <!-- Filters -->
@@ -2056,17 +2031,14 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 <!-- ═══════════════════════════════════════
      ACTO 4 — LAS VOCES
      ═══════════════════════════════════════ -->
-<div class="act-divider act-divider-4" id="act-4">
-  <p class="act-label">Acto IV</p>
-  <h2 class="act-divider-title">Las Voces</h2>
-</div>
-<section class="act-4">
+<section class="act-4" id="act-4">
   <div class="container">
 
-    <div class="reveal" style="margin-top: 1rem;">
-      <p class="act-subtitle" style="max-width: 800px;">Los que cruzaron fronteras y volvieron con nuevas preguntas.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Detrás de los datos hay personas. Alumnos de 14 años que nunca habían salido de España y descubrieron que un chico lituano tiene las mismas dudas sobre su futuro. Profesores que observaron cómo se enseña en una escuela sueca y volvieron con ideas para transformar sus clases. Familias de Aluche que acogieron a estudiantes franceses y descubrieron que la hospitalidad también es una forma de aprender.</p>
-      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Entre 2024 y 2026, nuestros alumnos y profesores han viajado a Francia (Gourdon, Montpellier, Clermont-l'Hérault), Lituania (Ylakiai), Italia (Génova), Irlanda (Portlaoise), Suecia (Gotemburgo) y Alemania (Fürth). Y hemos recibido a alumnos lituanos en Madrid. Cada movilidad ha dejado un rastro de aprendizajes que se refleja en cómo diseñamos nuestros proyectos.</p>
+    <div class="reveal">
+      <p class="act-label" style="color: var(--amber);">Acto IV</p>
+      <h2 class="act-title">Las Voces</h2>
+      <p class="act-subtitle">Los que cruzaron fronteras y volvieron con nuevas preguntas.</p>
+      <div class="accent-line" style="background: var(--amber);"></div>
     </div>
 
     <!-- Timeline -->
@@ -2230,6 +2202,10 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">10 alumnos de Santa Gema en Ylakiai &mdash; Ylakiu Gimnazija</p>
       <div class="photo-gallery">
         <div class="gallery-item gallery-wide">
+          <img src="assets/img/erasmus/madrid-grupo-gimnasio.jpg" alt="Foto de grupo en el gimnasio de Ylakiu Gimnazija" loading="lazy">
+          <div class="gallery-caption">Foto de grupo en Ylakiu Gimnazija &mdash; &laquo;Shine Like Stars&raquo;</div>
+        </div>
+        <div class="gallery-item gallery-wide">
           <img src="assets/img/erasmus/lituania-anfiteatro.jpg" alt="Anfiteatro frente al lago en Lituania" loading="lazy">
           <div class="gallery-caption">Anfiteatro junto al lago &mdash; Ylakiai</div>
         </div>
@@ -2390,7 +2366,7 @@ gsap.registerPlugin(ScrollTrigger);
       const alpha = 0.15 + scrollProgress * 0.2;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${p.hue}, 50%, 40%, ${alpha})`;
+      ctx.fillStyle = `hsla(${p.hue}, 80%, 70%, ${alpha})`;
       ctx.fill();
 
       // Draw connections to nearby particles (more connections as you scroll)
@@ -2404,7 +2380,7 @@ gsap.registerPlugin(ScrollTrigger);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(90, 155, 181, ${lineAlpha})`;
+            ctx.strokeStyle = `rgba(34, 211, 238, ${lineAlpha})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -2422,8 +2398,8 @@ gsap.registerPlugin(ScrollTrigger);
     islands.forEach(isl => {
       const pulse = Math.sin(time * 2 + isl.x * 0.01) * 4;
       const gradient = ctx.createRadialGradient(isl.x, isl.y, 0, isl.x, isl.y, isl.r + pulse);
-      gradient.addColorStop(0, 'rgba(90, 155, 181, 0.15)');
-      gradient.addColorStop(1, 'rgba(90, 155, 181, 0)');
+      gradient.addColorStop(0, 'rgba(167, 139, 250, 0.12)');
+      gradient.addColorStop(1, 'rgba(167, 139, 250, 0)');
       ctx.beginPath();
       ctx.arc(isl.x, isl.y, isl.r + pulse, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
@@ -2447,13 +2423,13 @@ window.addEventListener('scroll', () => {
 
 
 // ══════════════════════════════════════
-// GSAP Reveal animations (reversible)
+// GSAP Reveal animations
 // ══════════════════════════════════════
 document.querySelectorAll('.reveal').forEach(el => {
   gsap.fromTo(el,
     { opacity: 0, y: 50 },
     { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 15%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
     }
   );
 });
@@ -2584,7 +2560,7 @@ document.querySelectorAll('.timeline-item').forEach((item, i) => {
   gsap.fromTo(item,
     { opacity: 0, x: i % 2 === 0 ? -30 : 30 },
     { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: item, start: 'top 75%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: item, start: 'top 75%', once: true }
     }
   );
 });
@@ -2624,7 +2600,7 @@ gsap.utils.toArray('.via-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, y: 40, rotateX: 5 },
     { opacity: 1, y: 0, rotateX: 0, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
-      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 85%', once: true }
     }
   );
 });
@@ -2634,7 +2610,7 @@ gsap.utils.toArray('.profile-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, y: 30, scale: 0.9 },
     { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: i * 0.15, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 85%', once: true }
     }
   );
 });
@@ -2644,7 +2620,7 @@ gsap.utils.toArray('.deepdive').forEach((dd, i) => {
   gsap.fromTo(dd,
     { opacity: 0, y: 60 },
     { opacity: 1, y: 0, duration: 0.8, delay: i * 0.15, ease: 'power2.out',
-      scrollTrigger: { trigger: dd, start: 'top 80%', end: 'top 5%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: dd, start: 'top 80%', once: true }
     }
   );
 });
@@ -2654,7 +2630,7 @@ gsap.utils.toArray('.question-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, y: 30, scale: 0.95 },
     { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: i * 0.12, ease: 'power2.out',
-      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 85%', once: true }
     }
   );
 });
@@ -2664,7 +2640,7 @@ gsap.utils.toArray('.gallery-item').forEach((item, i) => {
   gsap.fromTo(item,
     { opacity: 0, y: 40, scale: 0.9 },
     { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
-      scrollTrigger: { trigger: item, start: 'top 90%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: item, start: 'top 90%', once: true }
     }
   );
 });
@@ -2674,7 +2650,7 @@ gsap.utils.toArray('.partner-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, x: -20 },
     { opacity: 1, x: 0, duration: 0.4, delay: i * 0.08, ease: 'power2.out',
-      scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 90%', once: true }
     }
   );
 });
