@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprender el Mundo — Colegio Santa Gema Galgani · Erasmus+</title>
+<meta name="description" content="Cómo la internacionalización Erasmus+ transformó nuestro modelo pedagógico de pensamiento complejo. Candidatura EITA 2026.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- GSAP ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════ */
+:root {
+  /* Base palette */
+  --bg-deep: #080d1a;
+  --bg-primary: #0c1222;
+  --bg-panel: #101829;
+  --bg-card: #141e30;
+  --bg-elevated: #1a2540;
+
+  /* Text */
+  --text-primary: #e8ecf4;
+  --text-secondary: #8b97b0;
+  --text-muted: #5a6a85;
+
+  /* Accent colors per act */
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34, 211, 238, 0.15);
+  --violet: #a78bfa;
+  --violet-dim: rgba(167, 139, 250, 0.12);
+  --emerald: #34d399;
+  --emerald-dim: rgba(52, 211, 153, 0.12);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251, 191, 36, 0.12);
+  --rose: #fb7185;
+  --rose-dim: rgba(251, 113, 133, 0.12);
+  --blue: #60a5fa;
+  --blue-dim: rgba(96, 165, 250, 0.12);
+
+  /* Borders */
+  --ring: rgba(255,255,255,0.06);
+  --ring-accent: rgba(34, 211, 238, 0.2);
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --section-pad: clamp(4rem, 10vw, 8rem);
+  --content-max: 1100px;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--cyan); text-decoration: none; }
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+.nav.scrolled {
+  background: rgba(8, 13, 26, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--ring);
+}
+.nav-brand {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--cyan);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ═══════════════════════════════════════
+   PROGRESS BAR
+   ═══════════════════════════════════════ */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--emerald), var(--amber));
+  z-index: 101;
+  width: 0%;
+  transition: width 0.1s;
+}
+
+/* ═══════════════════════════════════════
+   UTILITY
+   ═══════════════════════════════════════ */
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+.section-spacer { height: var(--section-pad); }
+.accent-line {
+  width: 60px; height: 3px;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+.reveal { opacity: 0; transform: translateY(40px); }
+.reveal.active { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
+
+/* ═══════════════════════════════════════
+   ACTO 0 — OBERTURA
+   ═══════════════════════════════════════ */
+.act-0 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+.act-0-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+.act-0-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+.obertura-epigraph {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1.5s ease 0.5s forwards;
+}
+.obertura-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1.5s ease 1s forwards;
+}
+.obertura-quote em { color: var(--cyan); font-style: normal; }
+.obertura-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  opacity: 0;
+  animation: fadeUp 1.5s ease 1.5s forwards;
+}
+.obertura-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--ring-accent);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  opacity: 0;
+  animation: fadeUp 1s ease 2s forwards;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: pulse 2s ease infinite;
+}
+.scroll-hint-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   ACTO 1 — EL ADN
+   ═══════════════════════════════════════ */
+.act-1 { padding: var(--section-pad) 0; }
+
+.act-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.act-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.act-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin-bottom: 3rem;
+}
+
+/* Elephant parable */
+.elephant-section {
+  padding: 4rem 0;
+  position: relative;
+}
+.elephant-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.elephant-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.elephant-parts-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.elephant-part {
+  padding: 0.8rem 1.3rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-card);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: all 0.6s ease;
+  opacity: 0.5;
+}
+.elephant-part.revealed { opacity: 1; border-color: var(--cyan); color: var(--text-primary); box-shadow: 0 0 30px var(--cyan-dim); }
+.elephant-whole {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cyan-dim), transparent 70%);
+  border: 2px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--cyan);
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 1s ease;
+  margin-top: 0.5rem;
+}
+.elephant-whole.revealed { opacity: 1; transform: scale(1); }
+
+.elephant-text blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--violet);
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.elephant-text p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.elephant-text p strong { color: var(--text-primary); font-weight: 600; }
+
+/* Paradigm comparison */
+.paradigm-section {
+  padding: 5rem 0;
+}
+.paradigm-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.paradigm-col {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+}
+.paradigm-col.paradigm-s {
+  background: linear-gradient(135deg, rgba(100,100,120,0.05), var(--bg-card));
+}
+.paradigm-col.paradigm-c {
+  background: linear-gradient(135deg, var(--cyan-dim), var(--bg-card));
+  border-color: rgba(34, 211, 238, 0.15);
+}
+.paradigm-col h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+.paradigm-col .paradigm-tag {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.paradigm-pair {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--ring);
+  font-size: 0.95rem;
+}
+.paradigm-pair:last-child { border-bottom: none; }
+.paradigm-separator {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+.paradigm-pair .sep {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.paradigm-pair .sep-linked {
+  color: var(--cyan);
+  font-weight: 600;
+}
+.paradigm-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 4rem;
+}
+.paradigm-arrow-line {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--text-muted), var(--cyan));
+  position: relative;
+}
+.paradigm-arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -6px; top: -4px;
+  border: 5px solid transparent;
+  border-left: 8px solid var(--cyan);
+}
+.paradigm-arrow span {
+  writing-mode: vertical-rl;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Six vías hexagon */
+.vias-section {
+  padding: 5rem 0;
+}
+.vias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.via-card {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  transition: all 0.4s ease;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.via-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 1.25rem 1.25rem 0 0;
+}
+.via-card:nth-child(1)::before { background: var(--violet); }
+.via-card:nth-child(2)::before { background: var(--blue); }
+.via-card:nth-child(3)::before { background: var(--emerald); }
+.via-card:nth-child(4)::before { background: var(--amber); }
+.via-card:nth-child(5)::before { background: var(--rose); }
+.via-card:nth-child(6)::before { background: var(--cyan); }
+
+.via-card:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.via-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.via-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin-bottom: 0.3rem;
+}
+.via-concept {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.via-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.via-theme-tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--ring);
+}
+
+/* Graduate profile */
+.profile-section {
+  padding: 5rem 0;
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.profile-card {
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  text-align: center;
+  transition: transform 0.3s;
+}
+.profile-card:hover { transform: translateY(-4px); }
+.profile-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.profile-card:nth-child(1) .profile-icon { background: var(--cyan-dim); }
+.profile-card:nth-child(2) .profile-icon { background: var(--violet-dim); }
+.profile-card:nth-child(3) .profile-icon { background: var(--emerald-dim); }
+.profile-card:nth-child(4) .profile-icon { background: var(--amber-dim); }
+.profile-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.profile-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════
+   ACTO 2 — LA HIPOTESIS
+   ═══════════════════════════════════════ */
+.act-2 {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+.act-2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet), transparent);
+}
+
+.questions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+.question-card {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  position: relative;
+  overflow: hidden;
+}
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.03;
+  background: radial-gradient(circle at 30% 30%, var(--violet), transparent 60%);
+}
+.question-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--violet);
+  opacity: 0.3;
+  position: absolute;
+  top: 0.5rem; right: 1rem;
+}
+.question-card h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.question-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  position: relative;
+}
+.objective-tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.obj-1 { background: var(--cyan-dim); color: var(--cyan); }
+.obj-2 { background: var(--violet-dim); color: var(--violet); }
+.obj-3 { background: var(--emerald-dim); color: var(--emerald); }
+.obj-4 { background: var(--amber-dim); color: var(--amber); }
+
+/* Map */
+.map-section {
+  padding: 5rem 0;
+}
+.map-container {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--ring);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  overflow: hidden;
+}
+.map-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(34, 211, 238, 0.03), transparent 60%);
+}
+.map-svg {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+}
+.map-point {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.map-point:hover .map-dot { r: 8; }
+.map-dot {
+  fill: var(--cyan);
+  transition: all 0.3s;
+}
+.map-dot-visited { fill: var(--emerald); }
+.map-dot-home { fill: var(--amber); }
+.map-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  fill: var(--text-secondary);
+}
+.map-line {
+  stroke: var(--cyan);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  opacity: 0.3;
+}
+.map-legend {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.legend-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Data panel */
+.data-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.data-card {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+}
+.data-number {
+  font-family: var(--font-body);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.data-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Partner cards */
+.partners-section { padding: 3rem 0; }
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.partner-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  display: flex;
+  gap: 1rem;
+  align-items: start;
+  transition: border-color 0.3s;
+}
+.partner-card:hover { border-color: rgba(255,255,255,0.1); }
+.partner-flag {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+.partner-info h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+.partner-info p { font-size: 0.8rem; color: var(--text-secondary); }
+.partner-info .partner-status {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+}
+.status-visited { background: var(--emerald-dim); color: var(--emerald); }
+.status-received { background: var(--blue-dim); color: var(--blue); }
+.status-network { background: var(--bg-elevated); color: var(--text-muted); }
+
+/* ═══════════════════════════════════════
+   ACTO 3 — EL LABORATORIO
+   ═══════════════════════════════════════ */
+.act-3 {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+.act-3::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+}
+
+/* Project filters */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--ring);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--emerald);
+  color: var(--emerald);
+  background: var(--emerald-dim);
+}
+
+/* Project mosaic */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.project-card {
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  transition: all 0.4s;
+  cursor: default;
+}
+.project-card:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+.project-card[data-hidden="true"] {
+  display: none;
+}
+.project-meta {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.project-tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.tag-steam { background: var(--cyan-dim); color: var(--cyan); }
+.tag-clc { background: var(--violet-dim); color: var(--violet); }
+.tag-epsgc { background: var(--emerald-dim); color: var(--emerald); }
+.tag-stem { background: var(--amber-dim); color: var(--amber); }
+.tag-via { background: var(--bg-elevated); color: var(--text-muted); }
+
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+.project-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Deep dive */
+.deepdive-section { padding: 5rem 0; }
+.deepdive {
+  border-radius: 1.5rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.deepdive-header {
+  padding: 2.5rem 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.deepdive-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.05;
+}
+.deepdive-header.dd-green::before { background: linear-gradient(135deg, var(--emerald), transparent); }
+.deepdive-header.dd-amber::before { background: linear-gradient(135deg, var(--amber), transparent); }
+.deepdive-header.dd-violet::before { background: linear-gradient(135deg, var(--violet), transparent); }
+.deepdive-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  position: relative;
+}
+.deepdive-header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  position: relative;
+  margin-top: 0.5rem;
+}
+.deepdive-body {
+  padding: 2rem 3rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.dd-question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--emerald);
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+.dd-connections {
+  list-style: none;
+}
+.dd-connections li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ring);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.dd-connections li:last-child { border: none; }
+.dd-connections li strong { color: var(--text-primary); }
+
+/* ═══════════════════════════════════════
+   ACTO 4 — LAS VOCES
+   ═══════════════════════════════════════ */
+.act-4 {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+.act-4::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding: 3rem 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--ring), var(--ring), transparent);
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 1.5rem;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 3px solid var(--amber);
+  background: var(--bg-deep);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.timeline-date {
+  text-align: right;
+  padding-right: 2rem;
+}
+.timeline-date h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+.timeline-date .tl-period {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.timeline-content {
+  padding-left: 2rem;
+}
+.timeline-content h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.timeline-content p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.tl-activities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.tl-activity-tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
+  font-size: 0.7rem;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--ring);
+}
+
+/* Testimonials */
+.testimonials-section { padding: 3rem 0; }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.testimonial {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-panel);
+  position: relative;
+}
+.testimonial::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--amber);
+  opacity: 0.2;
+  position: absolute;
+  top: 0.5rem; left: 1rem;
+  line-height: 1;
+}
+.testimonial blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.testimonial-author {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.testimonial-author strong { color: var(--text-primary); }
+.testimonial-pending {
+  color: var(--amber);
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+/* Photo gallery placeholder */
+.gallery-placeholder {
+  padding: 4rem;
+  border-radius: 1.5rem;
+  border: 2px dashed var(--ring);
+  text-align: center;
+  color: var(--text-muted);
+  margin: 3rem 0;
+}
+.gallery-placeholder h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════
+   ACTO 5 — CODA
+   ═══════════════════════════════════════ */
+.act-5 {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.act-5::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+.coda-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+.coda-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+.coda-quote em { color: var(--cyan); font-style: normal; }
+.coda-credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--ring);
+}
+.coda-erasmus {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.coda-erasmus-flag {
+  font-size: 2rem;
+}
+.coda-school {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.coda-school a { color: var(--cyan); }
+.coda-ids {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+.coda-eita {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--ring-accent);
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  font-size: 0.85rem;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .elephant-grid { grid-template-columns: 1fr; }
+  .vias-grid { grid-template-columns: repeat(2, 1fr); }
+  .profile-grid { grid-template-columns: repeat(2, 1fr); }
+  .questions-grid { grid-template-columns: 1fr; }
+  .data-panel { grid-template-columns: repeat(2, 1fr); }
+  .deepdive-body { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; }
+  .timeline::before { left: 1rem; }
+  .timeline-item::before { left: 1rem; }
+  .timeline-date { text-align: left; padding: 0 0 0 3rem; }
+  .timeline-content { padding-left: 3rem; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .vias-grid { grid-template-columns: 1fr; }
+  .profile-grid { grid-template-columns: 1fr; }
+  .data-panel { grid-template-columns: 1fr; }
+  .deepdive-header, .deepdive-body { padding: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+<!-- ═══════════ PROGRESS BAR ═══════════ -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-brand">Santa Gema &middot; Erasmus+</div>
+  <ul class="nav-links">
+    <li><a href="#act-0">Inicio</a></li>
+    <li><a href="#act-1">El ADN</a></li>
+    <li><a href="#act-2">La Hipótesis</a></li>
+    <li><a href="#act-3">El Laboratorio</a></li>
+    <li><a href="#act-4">Las Voces</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     ACTO 0 — OBERTURA
+     ═══════════════════════════════════════ -->
+<section class="act-0" id="act-0">
+  <canvas class="act-0-canvas" id="oceanCanvas"></canvas>
+
+  <div class="act-0-content">
+    <p class="obertura-epigraph">Edgar Morin</p>
+    <h1 class="obertura-quote">
+      &laquo;Es necesario aprender a navegar en un <em>océano de incertidumbres</em> a través de archipiélagos de certeza.&raquo;
+    </h1>
+    <p class="obertura-subtitle">
+      En el Colegio Santa Gema Galgani educamos para afrontar la complejidad, afrontar el cambio y dar sentido a la vida. Y para probarlo, cruzamos fronteras.
+    </p>
+    <div class="obertura-badge">
+      <span>&#127466;&#127482;</span>
+      Candidatura EITA 2026 &middot; Skills for Life
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ACTO 1 — EL ADN
+     ═══════════════════════════════════════ -->
+<section class="act-1" id="act-1">
+  <div class="container">
+
+    <!-- Section header -->
+    <div class="reveal">
+      <p class="act-label" style="color: var(--cyan);">Acto I</p>
+      <h2 class="act-title">El ADN</h2>
+      <p class="act-subtitle">Del paradigma de la simplicidad al paradigma de la complejidad. Así pensamos, así enseñamos.</p>
+      <div class="accent-line" style="background: var(--cyan);"></div>
+    </div>
+
+    <!-- Elephant parable -->
+    <div class="elephant-section reveal">
+      <div class="elephant-grid">
+        <div class="elephant-text">
+          <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">Cuento Sufí</p>
+          <blockquote>
+            Tres aldeanos ciegos entraron a una tienda a tocar un elefante. El primero tocó una pata y pensó que era una columna. El segundo agarró la cola y creyó que era una cuerda. El tercero tocó la trompa y salió corriendo pensando que era una serpiente. Los tres salieron convencidos de que sabían perfectamente lo que era un elefante.
+          </blockquote>
+          <p>
+            <strong>El pensamiento simple fragmenta.</strong> Cada aldeano tocó una parte y creyó entender el todo.
+            Así funciona la educación compartimentada: cada asignatura es un aldeano más que solo ve su fragmento.
+          </p>
+          <p>
+            <strong>El pensamiento complejo conecta.</strong> Nuestro modelo pedagógico forma alumnos que buscan el elefante completo:
+            las conexiones entre disciplinas, entre lo local y lo global, entre el saber y el ser.
+          </p>
+        </div>
+        <div class="elephant-visual">
+          <div class="elephant-parts-row">
+            <div class="elephant-part" id="ep1">&laquo;Es una columna&raquo;</div>
+            <div class="elephant-part" id="ep2">&laquo;Es una cuerda&raquo;</div>
+            <div class="elephant-part" id="ep3">&laquo;Es una serpiente&raquo;</div>
+          </div>
+          <div class="elephant-whole" id="epWhole">Pensamiento<br>complejo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Vías transdisciplinares -->
+    <div class="vias-section reveal">
+      <h2 class="act-title" style="font-size: 1.6rem;">6 vías transdisciplinares</h2>
+      <p class="act-subtitle" style="max-width: 750px;">En lugar de asignaturas aisladas, organizamos el conocimiento en torno a seis grandes preguntas sobre la realidad. Cada vía es una lente que atraviesa todas las materias: cuando un alumno estudia el cambio climático, no lo hace solo desde la ciencia &mdash; lo hace desde la ética, la política, la estética y la identidad. Las vías son el puente entre lo disciplinar y lo transdisciplinar.</p>
+      <div class="vias-grid">
+        <div class="via-card">
+          <p class="via-number">Vía 1</p>
+          <h3 class="via-name">Identidad</h3>
+          <p class="via-concept">Autoconocimiento &middot; &iquest;Quién soy?</p>
+          <div class="via-themes">
+            <span class="via-theme-tag">Creencias y valores</span>
+            <span class="via-theme-tag">Salud integral</span>
+            <span class="via-theme-tag">Relaciones humanas</span>
+          </div>
+        </div>
+        <div class="via-card">
+          <p class="via-number">Vía 2</p>
+          <h3 class="via-name">Existencia</h3>
+          <p class="via-concept">Espacio-tiempo &middot; &iquest;De dónde venimos?</p>
+          <div class="via-themes">
+            <span class="via-theme-tag">Historias personales</span>
+            <span class="via-theme-tag">Migraciones</span>
+            <span class="via-theme-tag">Civilizaciones</span>
+          </div>
+        </div>
+        <div class="via-card">
+          <p class="via-number">Vía 3</p>
+          <h3 class="via-name">Cosmología</h3>
+          <p class="via-concept">Ciencia con conciencia &middot; &iquest;Cómo funciona?</p>
+          <div class="via-themes">
+            <span class="via-theme-tag">Leyes naturales</span>
+            <span class="via-theme-tag">Innovación</span>
+            <span class="via-theme-tag">Impacto tecnológico</span>
+          </div>
+        </div>
+        <div class="via-card">
+          <p class="via-number">Vía 4</p>
+          <h3 class="via-name">Globalización</h3>
+          <p class="via-concept">Ciudadano terrestre &middot; &iquest;Cómo nos conectamos?</p>
+          <div class="via-themes">
+            <span class="via-theme-tag">Sistemas globales</span>
+            <span class="via-theme-tag">Medio ambiente</span>
+            <span class="via-theme-tag">Local &#8596; Global</span>
+          </div>
+        </div>
+        <div class="via-card">
+          <p class="via-number">Vía 5</p>
+          <h3 class="via-name">Ética y Política</h3>
+          <p class="via-concept">Derecho y responsabilidad &middot; &iquest;Qué es justo?</p>
+          <div class="via-themes">
+            <span class="via-theme-tag">Derechos</span>
+            <span class="via-theme-tag">Recursos compartidos</span>
+            <span class="via-theme-tag">Paz y conflicto</span>
+          </div>
+        </div>
+        <div class="via-card">
+          <p class="via-number">Vía 6</p>
+          <h3 class="via-name">Estética</h3>
+          <p class="via-concept">Arte y cultura &middot; &iquest;Qué es bello?</p>
+          <div class="via-themes">
+            <span class="via-theme-tag">Expresión creativa</span>
+            <span class="via-theme-tag">Valor estético</span>
+            <span class="via-theme-tag">Diversidad cultural</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate profile -->
+    <div class="profile-section reveal">
+      <h2 class="act-title" style="font-size: 1.6rem;">Perfil de salida del alumno</h2>
+      <p class="act-subtitle">Cuatro dimensiones de la persona que queremos formar.</p>
+      <div class="profile-grid">
+        <div class="profile-card">
+          <div class="profile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4>Visión del mundo</h4>
+          <p>Comprende la realidad como un sistema complejo, multidimensional e interconectado.</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h4>Aprendizaje autónomo</h4>
+          <p>Aprende a aprender. Formula preguntas, investiga, conecta saberes de distintas disciplinas.</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h4>Integridad y compromiso</h4>
+          <p>Actúa con rigor, apertura y tolerancia. Comprende antes de juzgar.</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>Equilibrio integral</h4>
+          <p>Desarrolla su dimensión individual, social y como parte de la especie humana.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ACTO 2 — LA HIPÓTESIS
+     ═══════════════════════════════════════ -->
+<section class="act-2" id="act-2">
+  <div class="container">
+
+    <div class="reveal">
+      <p class="act-label" style="color: var(--violet);">Acto II</p>
+      <h2 class="act-title">La Hipótesis</h2>
+      <p class="act-subtitle">&iquest;Y si cruzar fronteras nos hace mejores educadores? Erasmus+ como laboratorio de nuestro modelo pedagógico.</p>
+      <div class="accent-line" style="background: var(--violet);"></div>
+    </div>
+
+    <!-- 4 Questions -->
+    <div class="questions-grid reveal">
+      <div class="question-card">
+        <span class="objective-tag obj-1">Objetivo 1</span>
+        <span class="question-number">01</span>
+        <h3>&laquo;&iquest;Pueden nuestras UBPI conectar con los ODS cuando salen de España?&raquo;</h3>
+        <p>Conectar las Unidades Basadas en Proyectos Interdisciplinares con los Objetivos de Desarrollo Sostenible a través de la experiencia internacional.</p>
+      </div>
+      <div class="question-card">
+        <span class="objective-tag obj-2">Objetivo 2</span>
+        <span class="question-number">02</span>
+        <h3>&laquo;&iquest;Qué significa ser ciudadano europeo a los 14 años?&raquo;</h3>
+        <p>Desarrollar el sentimiento de pertenencia de ciudadanía europea en alumnos y profesores a través de la convivencia con familias de otros países.</p>
+      </div>
+      <div class="question-card">
+        <span class="objective-tag obj-3">Objetivo 3</span>
+        <span class="question-number">03</span>
+        <h3>&laquo;&iquest;Cómo se incluye a quien normalmente no viaja?&raquo;</h3>
+        <p>Favorecer la inclusión del alumnado desfavorecido en los proyectos Erasmus, con un baremo de participación que prioriza a quienes más lo necesitan.</p>
+      </div>
+      <div class="question-card">
+        <span class="objective-tag obj-4">Objetivo 4</span>
+        <span class="question-number">04</span>
+        <h3>&laquo;&iquest;Se puede enseñar sostenibilidad sin fronteras?&raquo;</h3>
+        <p>Desarrollar proyectos sostenibles medioambientales en colaboración con centros europeos, comparando entornos rurales y urbanos.</p>
+      </div>
+    </div>
+
+    <!-- Europe Map -->
+    <div class="map-section reveal">
+      <h2 class="act-title" style="font-size: 1.6rem;">Nuestra red europea</h2>
+      <div class="map-container">
+        <svg class="map-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- Simplified Europe outline -->
+          <defs>
+            <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color: rgba(34,211,238,0.1)"/>
+              <stop offset="100%" style="stop-color: transparent"/>
+            </radialGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#mapGlow)" rx="12"/>
+
+          <!-- Connection lines from Madrid -->
+          <line x1="280" y1="360" x2="600" y2="180" class="map-line"/> <!-- Lithuania -->
+          <line x1="280" y1="360" x2="370" y2="310" class="map-line"/> <!-- France -->
+          <line x1="280" y1="360" x2="520" y2="340" class="map-line"/> <!-- Serbia -->
+          <line x1="280" y1="360" x2="550" y2="300" class="map-line"/> <!-- Bulgaria -->
+          <line x1="280" y1="360" x2="540" y2="370" class="map-line"/> <!-- Greece -->
+          <line x1="280" y1="360" x2="490" y2="350" class="map-line"/> <!-- Turkey -->
+          <line x1="280" y1="360" x2="340" y2="240" class="map-line"/> <!-- UK -->
+          <line x1="280" y1="360" x2="220" y2="370" class="map-line"/> <!-- Portugal -->
+
+          <!-- City points -->
+          <!-- Madrid (home) -->
+          <g class="map-point">
+            <circle cx="280" cy="360" r="7" class="map-dot map-dot-home" opacity="0.3"/>
+            <circle cx="280" cy="360" r="5" class="map-dot map-dot-home"/>
+            <text x="280" y="380" text-anchor="middle" class="map-label" font-weight="700">MADRID</text>
+          </g>
+
+          <!-- Gourdon, France (visited) -->
+          <g class="map-point">
+            <circle cx="370" cy="310" r="5" class="map-dot map-dot-visited"/>
+            <text x="370" y="300" text-anchor="middle" class="map-label">Gourdon</text>
+          </g>
+
+          <!-- Ylakiai, Lithuania (visited) -->
+          <g class="map-point">
+            <circle cx="600" cy="180" r="5" class="map-dot map-dot-visited"/>
+            <text x="600" y="170" text-anchor="middle" class="map-label">Ylakiai</text>
+          </g>
+
+          <!-- Pozarevac, Serbia (network) -->
+          <g class="map-point">
+            <circle cx="520" cy="340" r="4" class="map-dot"/>
+            <text x="520" y="355" text-anchor="middle" class="map-label">Pozarevac</text>
+          </g>
+
+          <!-- Sofia, Bulgaria (network) -->
+          <g class="map-point">
+            <circle cx="550" cy="300" r="4" class="map-dot"/>
+            <text x="565" y="295" text-anchor="start" class="map-label">Sofia</text>
+          </g>
+
+          <!-- Larisa, Greece (network) -->
+          <g class="map-point">
+            <circle cx="540" cy="370" r="4" class="map-dot"/>
+            <text x="555" y="375" text-anchor="start" class="map-label">Larisa</text>
+          </g>
+
+          <!-- Aydın, Turkey (network) -->
+          <g class="map-point">
+            <circle cx="590" cy="360" r="4" class="map-dot"/>
+            <text x="600" y="375" text-anchor="start" class="map-label">Aydın</text>
+          </g>
+
+          <!-- Manchester, UK (network) -->
+          <g class="map-point">
+            <circle cx="340" cy="240" r="4" class="map-dot"/>
+            <text x="340" y="230" text-anchor="middle" class="map-label">Manchester</text>
+          </g>
+
+          <!-- Porto, Portugal (network) -->
+          <g class="map-point">
+            <circle cx="220" cy="370" r="4" class="map-dot"/>
+            <text x="210" y="385" text-anchor="middle" class="map-label">Porto</text>
+          </g>
+        </svg>
+
+        <div class="map-legend">
+          <span><span class="legend-dot" style="background:var(--amber)"></span>Santa Gema (Madrid)</span>
+          <span><span class="legend-dot" style="background:var(--emerald)"></span>Movilidad realizada</span>
+          <span><span class="legend-dot" style="background:var(--cyan)"></span>Red de centros</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data panel -->
+    <div class="data-panel reveal">
+      <div class="data-card">
+        <div class="data-number" style="color: var(--cyan);" data-count="3">0</div>
+        <div class="data-label">Movilidades<br>realizadas</div>
+      </div>
+      <div class="data-card">
+        <div class="data-number" style="color: var(--emerald);" data-count="32">0</div>
+        <div class="data-label">Alumnos<br>participantes</div>
+      </div>
+      <div class="data-card">
+        <div class="data-number" style="color: var(--violet);" data-count="8">0</div>
+        <div class="data-label">Países en<br>nuestra red</div>
+      </div>
+      <div class="data-card">
+        <div class="data-number" style="color: var(--amber);" data-count="55">0</div>
+        <div class="data-label">Años de<br>experiencia educativa</div>
+      </div>
+    </div>
+
+    <!-- Partners -->
+    <div class="partners-section reveal">
+      <h2 class="act-title" style="font-size: 1.4rem;">Centros de nuestra red</h2>
+      <div class="partners-grid">
+        <div class="partner-card">
+          <span class="partner-flag">&#127473;&#127481;</span>
+          <div class="partner-info">
+            <h4>Ylakiu Gimnazija</h4>
+            <p>Ylakiai, Lituania</p>
+            <span class="partner-status status-visited">Movilidad completada</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127467;&#127479;</span>
+          <div class="partner-info">
+            <h4>Cité scolaire Léo Ferré</h4>
+            <p>Gourdon, Francia</p>
+            <span class="partner-status status-visited">Movilidad completada</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127479;&#127480;</span>
+          <div class="partner-info">
+            <h4>Osnovna skola &laquo;Sveti Sava&raquo;</h4>
+            <p>Pozarevac, Serbia</p>
+            <span class="partner-status status-network">En red</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127468;&#127479;</span>
+          <div class="partner-info">
+            <h4>Open Up &middot; Greek Scientific Association</h4>
+            <p>Larisa, Grecia</p>
+            <span class="partner-status status-network">En red</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127463;&#127468;</span>
+          <div class="partner-info">
+            <h4>ESPA Private School</h4>
+            <p>Sofia, Bulgaria</p>
+            <span class="partner-status status-network">En red</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127468;&#127463;</span>
+          <div class="partner-info">
+            <h4>St Bede's Foundation</h4>
+            <p>Manchester, Reino Unido</p>
+            <span class="partner-status status-network">En red</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127477;&#127481;</span>
+          <div class="partner-info">
+            <h4>Alexandrino Oliveira</h4>
+            <p>Porto, Portugal</p>
+            <span class="partner-status status-network">En red</span>
+          </div>
+        </div>
+        <div class="partner-card">
+          <span class="partner-flag">&#127481;&#127479;</span>
+          <div class="partner-info">
+            <h4>Nazilli Fenlisesi</h4>
+            <p>Aydın, Turquía</p>
+            <span class="partner-status status-network">En red</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ACTO 3 — EL LABORATORIO
+     ═══════════════════════════════════════ -->
+<section class="act-3" id="act-3">
+  <div class="container">
+
+    <div class="reveal">
+      <p class="act-label" style="color: var(--emerald);">Acto III</p>
+      <h2 class="act-title">El Laboratorio</h2>
+      <p class="act-subtitle">Donde la teoría se hace proyecto. Curso 2025-2026: más de 20 proyectos interdisciplinares en 4 cursos de ESO.</p>
+      <div class="accent-line" style="background: var(--emerald);"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="1eso">1&ordm; ESO</button>
+      <button class="filter-btn" data-filter="2eso">2&ordm; ESO</button>
+      <button class="filter-btn" data-filter="3eso">3&ordm; ESO</button>
+      <button class="filter-btn" data-filter="4eso">4&ordm; ESO</button>
+      <button class="filter-btn" data-filter="steam">STEAM</button>
+      <button class="filter-btn" data-filter="clc">CLC</button>
+      <button class="filter-btn" data-filter="epsgc">EPSGC</button>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="projects-grid reveal" id="projectsGrid">
+      <!-- 1º ESO -->
+      <div class="project-card" data-tags="1eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">1&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 2 &middot; Existencia</span>
+        </div>
+        <h3>We Will Rock You</h3>
+        <p>Geología viva: de las rocas del Museo Geominero a una exposición propia. Investigar, clasificar y contar la historia de la Tierra.</p>
+      </div>
+      <div class="project-card" data-tags="1eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">1&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 6 &middot; Estética</span>
+        </div>
+        <h3>Be Water My Friend</h3>
+        <p>El ciclo del agua como sistema complejo: desde la molécula hasta la expresión artística y cultural del agua en distintas civilizaciones.</p>
+      </div>
+      <div class="project-card" data-tags="1eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">1&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 3 &middot; Cosmología</span>
+        </div>
+        <h3>To Infinity and Beyond</h3>
+        <p>Exploración espacial: modelado de sistemas planetarios, investigación sobre la historia de la astronomía y construcción de maquetas.</p>
+      </div>
+      <div class="project-card" data-tags="1eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">1&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 4 &middot; Globalización</span>
+        </div>
+        <h3>Stranger Invaders</h3>
+        <p>Especies invasoras y biodiversidad: el impacto de especies no autóctonas en los ecosistemas locales. Lo local como espejo de lo global.</p>
+      </div>
+      <div class="project-card" data-tags="1eso clc">
+        <div class="project-meta">
+          <span class="project-tag tag-clc">CLC</span>
+          <span class="project-tag tag-via">1&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 4 &middot; Globalización</span>
+        </div>
+        <h3>El Mundo en 2050</h3>
+        <p>Imaginar el futuro del planeta: los alumnos investigan tendencias globales y crean narrativas sobre cómo será el mundo dentro de 25 años.</p>
+      </div>
+
+      <!-- 2º ESO -->
+      <div class="project-card" data-tags="2eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">2&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 4 &middot; Globalización</span>
+        </div>
+        <h3>Flames Without Borders</h3>
+        <p>Los incendios no entienden de fronteras: investigación sobre catástrofes naturales y su impacto transnacional.</p>
+      </div>
+      <div class="project-card" data-tags="2eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">2&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 5 &middot; Ética</span>
+        </div>
+        <h3>Power with Purpose</h3>
+        <p>Energía y responsabilidad: de las fuentes de energía a la justicia energética. Un gran poder conlleva una gran responsabilidad.</p>
+      </div>
+      <div class="project-card" data-tags="2eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">2&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 2 &middot; Existencia</span>
+        </div>
+        <h3>Madrid 2050</h3>
+        <p>Rediseñar la ciudad: los alumnos proyectan cómo debería transformarse Madrid para ser sostenible, habitable y justa en 2050.</p>
+      </div>
+      <div class="project-card" data-tags="2eso clc">
+        <div class="project-meta">
+          <span class="project-tag tag-clc">CLC</span>
+          <span class="project-tag tag-via">2&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 6 &middot; Estética</span>
+        </div>
+        <h3>Buen Camino, Peregrino</h3>
+        <p>El Camino de Santiago como hilo conductor: patrimonio, encuentro entre culturas y búsqueda de sentido a través de la lengua y la literatura clásica.</p>
+      </div>
+
+      <!-- 3º ESO -->
+      <div class="project-card" data-tags="3eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">3&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 3 &middot; Cosmología</span>
+        </div>
+        <h3>Mission Science</h3>
+        <p>Feria científica real: los alumnos diseñan, ejecutan y presentan experimentos ante la comunidad educativa. Torres de spaghetti incluidas.</p>
+      </div>
+      <div class="project-card" data-tags="3eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">3&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 4 &middot; Globalización</span>
+        </div>
+        <h3>From Trash to Trend</h3>
+        <p>Moda sostenible en inglés: transformar residuos en diseño. Conexión directa con los ODS y la economía circular, trabajado íntegramente en lengua extranjera.</p>
+      </div>
+      <div class="project-card" data-tags="3eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">3&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 5 &middot; Ética</span>
+        </div>
+        <h3>Cents and Sensibility</h3>
+        <p>Economía, justicia y responsabilidad social: los alumnos investigan en inglés el precio del progreso y sus consecuencias éticas.</p>
+      </div>
+      <div class="project-card" data-tags="3eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">3&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 3 &middot; Cosmología</span>
+        </div>
+        <h3>Encendiendo el Mañana</h3>
+        <p>Energía sostenible: charlas con profesionales, investigación sobre renovables y diseño de soluciones locales para un futuro energético justo.</p>
+      </div>
+
+      <!-- 4º ESO -->
+      <div class="project-card" data-tags="4eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 4 &middot; Globalización</span>
+        </div>
+        <h3>Aluche Verde</h3>
+        <p>Transformar el barrio: diseñar intervenciones sostenibles para Aluche. Conexión directa con el objetivo 4 Erasmus y los ODS.</p>
+      </div>
+      <div class="project-card" data-tags="4eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 3 &middot; Cosmología</span>
+        </div>
+        <h3>La Era del Algoritmo</h3>
+        <p>Inteligencia artificial y ética: cómo los algoritmos moldean nuestra realidad. Ciencia, filosofía y responsabilidad tecnológica.</p>
+      </div>
+      <div class="project-card" data-tags="4eso steam">
+        <div class="project-meta">
+          <span class="project-tag tag-steam">STEAM</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 6 &middot; Estética</span>
+        </div>
+        <h3>El Museo del Engaño</h3>
+        <p>Arte, percepción y ciencia: los alumnos crean un museo de ilusiones ópticas que cuestiona la relación entre realidad y apariencia.</p>
+      </div>
+      <div class="project-card" data-tags="4eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 1 &middot; Identidad</span>
+        </div>
+        <h3>The Power of Change</h3>
+        <p>Cambio social y ciudadanía en inglés: empoderamiento personal conectado con la transformación colectiva.</p>
+      </div>
+      <div class="project-card" data-tags="4eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 2 &middot; Existencia</span>
+        </div>
+        <h3>Voices of Resilience</h3>
+        <p>Narrativas de resistencia y diversidad: historias de superación conectadas con la propia identidad y la evolución humana.</p>
+      </div>
+      <div class="project-card" data-tags="4eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 6 &middot; Estética</span>
+        </div>
+        <h3>Cold War Dance Battle</h3>
+        <p>La Guerra Fría contada a través de la danza: historia, cuerpo y expresión artística en lengua extranjera.</p>
+      </div>
+      <div class="project-card" data-tags="4eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 4 &middot; Globalización</span>
+        </div>
+        <h3>Art Hackers &mdash; Under the Same Sky</h3>
+        <p>Intervenciones artísticas que conectan culturas bajo un mismo cielo. El arte como lengua franca europea.</p>
+      </div>
+      <div class="project-card" data-tags="4eso epsgc">
+        <div class="project-meta">
+          <span class="project-tag tag-epsgc">EPSGC</span>
+          <span class="project-tag tag-via">4&ordm; ESO</span>
+          <span class="project-tag tag-via">Vía 5 &middot; Ética</span>
+        </div>
+        <h3>Divergent</h3>
+        <p>Inspirado en la distopía: los alumnos cuestionan las etiquetas, los sistemas que clasifican personas y la ética del conocimiento.</p>
+      </div>
+    </div>
+
+    <!-- Deep dives -->
+    <div class="deepdive-section reveal">
+      <h2 class="act-title" style="font-size: 1.4rem;">Proyectos en profundidad</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">Cuatro proyectos que demuestran la conexión entre nuestro modelo pedagógico y Erasmus+.</p>
+
+      <div class="deepdive">
+        <div class="deepdive-header dd-green">
+          <span class="project-tag tag-steam" style="margin-bottom: 0.5rem; display: inline-block;">STEAM &middot; 4&ordm; ESO</span>
+          <h3>Aluche Verde</h3>
+          <p>Sostenibilidad urbana desde el barrio al mundo</p>
+        </div>
+        <div class="deepdive-body">
+          <div>
+            <div class="dd-question">&laquo;&iquest;Cómo podemos transformar nuestro barrio en un lugar más sostenible, y qué podemos aprender de cómo lo hacen en Gourdon?&raquo;</div>
+            <p style="font-size:0.9rem; color: var(--text-secondary);">Los alumnos diseñan intervenciones urbanas para Aluche (Madrid, barrio de clase media-baja, puesto 42 de 54 en renta per cápita) comparando con las prácticas de sostenibilidad rural que estudiantes y profesores observaron en Gourdon (Francia) durante la movilidad Erasmus.</p>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Conexiones</h4>
+            <ul class="dd-connections">
+              <li><strong>Erasmus Obj. 4:</strong> Proyectos sostenibles medioambientales</li>
+              <li><strong>Erasmus Obj. 1:</strong> UBPI + ODS (ODS 11, 13, 15)</li>
+              <li><strong>Vía 4:</strong> Globalización &mdash; Local &#8596; Global</li>
+              <li><strong>Movilidad Francia:</strong> Talleres Bourdian Gardens, visita planta reciclaje Cahors</li>
+              <li><strong>ISO 14001:</strong> El centro tiene certificación medioambiental</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="deepdive">
+        <div class="deepdive-header dd-violet">
+          <span class="project-tag tag-epsgc" style="margin-bottom: 0.5rem; display: inline-block;">EPSGC &middot; 4&ordm; ESO</span>
+          <h3>Art Hackers &mdash; Under the Same Sky</h3>
+          <p>Arte como puente entre culturas europeas</p>
+        </div>
+        <div class="deepdive-body">
+          <div>
+            <div class="dd-question" style="border-color: var(--violet);">&laquo;&iquest;Puede el arte ser la lengua franca que una a jóvenes de distintos países europeos?&raquo;</div>
+            <p style="font-size:0.9rem; color: var(--text-secondary);">Proyecto de intervención artística en inglés donde los alumnos crean obras que dialogan con las de sus compañeros europeos. El &laquo;mismo cielo&raquo; como metáfora de lo que compartimos, más allá de fronteras e idiomas.</p>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Conexiones</h4>
+            <ul class="dd-connections">
+              <li><strong>Erasmus Obj. 2:</strong> Ciudadanía europea</li>
+              <li><strong>Vía 6:</strong> Estética &mdash; Expresión cultural</li>
+              <li><strong>Competencia CLIL:</strong> Todo el proyecto en lengua extranjera</li>
+              <li><strong>Multiculturalismo:</strong> +25 nacionalidades en el centro</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="deepdive">
+        <div class="deepdive-header dd-amber">
+          <span class="project-tag tag-epsgc" style="margin-bottom: 0.5rem; display: inline-block;">EPSGC &middot; 4&ordm; ESO</span>
+          <h3>Voices of Resilience</h3>
+          <p>Inclusión y diversidad como motor pedagógico</p>
+        </div>
+        <div class="deepdive-body">
+          <div>
+            <div class="dd-question" style="border-color: var(--amber);">&laquo;&iquest;Cómo contamos la historia de quien normalmente no tiene voz?&raquo;</div>
+            <p style="font-size:0.9rem; color: var(--text-secondary);">Los alumnos investigan narrativas de resiliencia en su entorno (Aluche tiene familias migrantes de +25 nacionalidades, incluyendo 5 alumnos ucranianos refugiados) y las conectan con historias de sus compañeros lituanos y franceses.</p>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Conexiones</h4>
+            <ul class="dd-connections">
+              <li><strong>Erasmus Obj. 3:</strong> Inclusión del alumnado desfavorecido</li>
+              <li><strong>Vía 1:</strong> Identidad &mdash; Autoconocimiento</li>
+              <li><strong>Baremo inclusión:</strong> Prioridad a renta baja, NEE, situaciones vulnerables</li>
+              <li><strong>Morin:</strong> &laquo;Comprender es comprender las motivaciones, situar en el contexto&raquo;</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="deepdive">
+        <div class="deepdive-header dd-green">
+          <span class="project-tag tag-epsgc" style="margin-bottom: 0.5rem; display: inline-block;">EPSGC &middot; 3&ordm; ESO</span>
+          <h3>From Trash to Trend</h3>
+          <p>Moda sostenible como puente entre lo local y lo global</p>
+        </div>
+        <div class="deepdive-body">
+          <div>
+            <div class="dd-question">&laquo;&iquest;Puede la basura convertirse en diseño, y puede ese proceso enseñarnos algo sobre cómo consumimos en Europa?&raquo;</div>
+            <p style="font-size:0.9rem; color: var(--text-secondary);">Los alumnos transforman residuos en piezas de moda sostenible, trabajando íntegramente en inglés. El proyecto compara patrones de consumo y reciclaje entre España y los países visitados en las movilidades (Francia rural vs. Madrid urbano), conectando con la economía circular y los ODS.</p>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Conexiones</h4>
+            <ul class="dd-connections">
+              <li><strong>Erasmus Obj. 4:</strong> Sostenibilidad medioambiental</li>
+              <li><strong>Erasmus Obj. 1:</strong> UBPI + ODS (ODS 12: Producción responsable)</li>
+              <li><strong>Vía 4:</strong> Globalización &mdash; consumo local vs. impacto global</li>
+              <li><strong>Movilidad Francia:</strong> Planta reciclaje Cahors, Jardín Botánico</li>
+              <li><strong>CLIL:</strong> Proyecto completo en lengua extranjera</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ACTO 4 — LAS VOCES
+     ═══════════════════════════════════════ -->
+<section class="act-4" id="act-4">
+  <div class="container">
+
+    <div class="reveal">
+      <p class="act-label" style="color: var(--amber);">Acto IV</p>
+      <h2 class="act-title">Las Voces</h2>
+      <p class="act-subtitle">Los que cruzaron fronteras y volvieron con nuevas preguntas.</p>
+      <div class="accent-line" style="background: var(--amber);"></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">
+          <h4>Gourdon, Francia</h4>
+          <p class="tl-period">13 &ndash; 20 marzo 2024</p>
+        </div>
+        <div class="timeline-content">
+          <h4>12 alumnos &middot; Lycée Léo Ferré</h4>
+          <p>Inmersión lingüística, talleres en los Jardines Bourdianos (cultivo, compostaje, hotel de insectos), visita a planta de reciclaje de Cahors, exploración de las cuevas prehistóricas de Pech Merle y el pueblo medieval de Saint-Cirq-Lapopie.</p>
+          <div class="tl-activities">
+            <span class="tl-activity-tag">Sostenibilidad rural vs urbana</span>
+            <span class="tl-activity-tag">Inmersión en clases francesas</span>
+            <span class="tl-activity-tag">Patrimonio UNESCO</span>
+            <span class="tl-activity-tag">Diario de aprendizaje</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">
+          <h4>Madrid (recibimos)</h4>
+          <p class="tl-period">22 &ndash; 29 abril 2024</p>
+        </div>
+        <div class="timeline-content">
+          <h4>10 alumnos lituanos &middot; Ylakiu Gimnazija</h4>
+          <p>Los alumnos lituanos asistieron a clases en Santa Gema (inglés, español, religión, historia, filosofía), visitaron el Museo del Prado, Toledo, el Canal de Isabel II y la planta de tratamiento de Loeches. Reflexión &laquo;Sustainable Madrid through my eyes&raquo;.</p>
+          <div class="tl-activities">
+            <span class="tl-activity-tag">Observación docente</span>
+            <span class="tl-activity-tag">Ciudad sostenible</span>
+            <span class="tl-activity-tag">Inmersión en familias</span>
+            <span class="tl-activity-tag">Patrimonio cultural</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">
+          <h4>Ylakiai, Lituania</h4>
+          <p class="tl-period">13 &ndash; 20 mayo 2024</p>
+        </div>
+        <div class="timeline-content">
+          <h4>10 alumnos &middot; Ylakiu Gimnazija</h4>
+          <p>Taller fotográfico &laquo;I/We in a Sustainable City&raquo;, cocina sostenible lituana, observación del sistema educativo, danza folclórica con el grupo ALDA, excursión al Parque Nacional Žemaitija y las dunas del Curonian Spit (UNESCO).</p>
+          <div class="tl-activities">
+            <span class="tl-activity-tag">Fotografía sostenible</span>
+            <span class="tl-activity-tag">Cocina intercultural</span>
+            <span class="tl-activity-tag">Biodiversidad báltica</span>
+            <span class="tl-activity-tag">Diario en Padlet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials-section reveal">
+      <h2 class="act-title" style="font-size: 1.4rem;">Testimonios</h2>
+
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <blockquote>&laquo;En Gourdon entendí que reciclar no es lo mismo en un pueblo que en una ciudad. Parece obvio, pero hasta que no lo ves con tus ojos no lo comprendes de verdad.&raquo;</blockquote>
+          <div class="testimonial-author"><strong>Alumno/a de 3&ordm; ESO</strong><br>Movilidad Francia, marzo 2024</div>
+          <p class="testimonial-pending">[PENDIENTE: sustituir por testimonio real]</p>
+        </div>
+        <div class="testimonial">
+          <blockquote>&laquo;Cuando los alumnos lituanos vinieron a nuestras clases, mis estudiantes tuvieron que explicar en inglés cosas que en español dan por sentadas. Enseñar a otro es la mejor forma de aprender.&raquo;</blockquote>
+          <div class="testimonial-author"><strong>Profesor/a de Santa Gema</strong><br>Visita lituanos, abril 2024</div>
+          <p class="testimonial-pending">[PENDIENTE: sustituir por testimonio real]</p>
+        </div>
+        <div class="testimonial">
+          <blockquote>&laquo;Nunca había salido de España. Pensaba que Lituania sería muy diferente, pero descubrí que los chicos de Ylakiai tienen las mismas dudas que yo sobre su futuro.&raquo;</blockquote>
+          <div class="testimonial-author"><strong>Alumno/a de 4&ordm; ESO</strong><br>Movilidad Lituania, mayo 2024</div>
+          <p class="testimonial-pending">[PENDIENTE: sustituir por testimonio real]</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo gallery placeholder -->
+    <div class="gallery-placeholder reveal">
+      <h3>&#128247; Galería de las movilidades</h3>
+      <p>Las fotografías de Gourdon (Francia) y Ylakiai (Lituania) se añadirán aquí.<br>
+      <span style="font-size: 0.8rem;">Consultar <code>faltantes.md</code> para el listado completo de contenido pendiente.</span></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ACTO 5 — CODA
+     ═══════════════════════════════════════ -->
+<section class="act-5" id="act-5">
+  <div class="container">
+    <div class="coda-content reveal">
+      <p class="act-label" style="color: var(--cyan);">Coda</p>
+      <h2 class="coda-quote">
+        Educar para la complejidad no es un destino.<br>
+        Es un camino.<br>
+        Y cada frontera que cruzamos nos devuelve <em>mejores preguntas</em>.
+      </h2>
+
+      <div class="coda-credits">
+        <div class="coda-erasmus">
+          <span class="coda-erasmus-flag">&#127466;&#127482;</span>
+          <span>Cofinanciado por el programa Erasmus+ de la Unión Europea</span>
+        </div>
+        <div class="coda-school">
+          <strong>Colegio Santa Gema Galgani</strong><br>
+          C/ de Escalona, 59 &middot; 28024 Madrid<br>
+          <a href="https://colegio-santagema.es" target="_blank" rel="noopener">colegio-santagema.es</a>
+        </div>
+        <div class="coda-ids">
+          Organisation ID: E10298292<br>
+          Grant: 2023-1-ES01-KA121-SCH-000138919<br>
+          Acreditación: KA120-SCH-93A67403
+        </div>
+        <div class="coda-eita">
+          Candidatura al Premio Europeo a la Enseñanza Innovadora (EITA) 2026<br>
+          <strong>&laquo;Competencias para la vida&raquo;</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+// ──── Ocean Canvas (Act 0) ────
+(function initOcean() {
+  const canvas = document.getElementById('oceanCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, time = 0;
+
+  function resize() {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Simple noise-based ocean
+  function noise(x, y, t) {
+    return Math.sin(x * 0.01 + t) * Math.cos(y * 0.008 + t * 0.7) * 0.5
+         + Math.sin(x * 0.02 - t * 0.5) * Math.cos(y * 0.015 + t * 0.3) * 0.3
+         + Math.sin(x * 0.005 + y * 0.005 + t * 0.2) * 0.2;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    time += 0.008;
+
+    // Draw wave field
+    const step = 30;
+    for (let x = 0; x < w; x += step) {
+      for (let y = 0; y < h; y += step) {
+        const n = noise(x, y, time);
+        const alpha = Math.max(0, n * 0.15 + 0.02);
+        const size = Math.max(1, (n + 1) * 2);
+        ctx.beginPath();
+        ctx.arc(x + n * 5, y + n * 3, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(34, 211, 238, ${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    // Draw "islands" (archipelagos of certainty)
+    const islands = [
+      { x: w * 0.2, y: h * 0.3, r: 25, label: '' },
+      { x: w * 0.6, y: h * 0.5, r: 20, label: '' },
+      { x: w * 0.8, y: h * 0.25, r: 18, label: '' },
+      { x: w * 0.35, y: h * 0.7, r: 22, label: '' },
+      { x: w * 0.75, y: h * 0.7, r: 15, label: '' },
+    ];
+    islands.forEach(isl => {
+      const pulse = Math.sin(time * 2 + isl.x * 0.01) * 3;
+      ctx.beginPath();
+      ctx.arc(isl.x, isl.y, isl.r + pulse, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(167, 139, 250, 0.06)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(isl.x, isl.y, (isl.r + pulse) * 0.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(167, 139, 250, 0.12)';
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+
+// ──── Progress bar ────
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+});
+
+// ──── Nav scroll effect ────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 80);
+});
+
+
+// ──── GSAP Reveal animations ────
+gsap.registerPlugin(ScrollTrigger);
+
+document.querySelectorAll('.reveal').forEach(el => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        once: true
+      }
+    }
+  );
+});
+
+// ──── Elephant reveal on scroll ────
+ScrollTrigger.create({
+  trigger: '.elephant-section',
+  start: 'top 60%',
+  once: true,
+  onEnter: () => {
+    setTimeout(() => document.getElementById('ep1').classList.add('revealed'), 200);
+    setTimeout(() => document.getElementById('ep2').classList.add('revealed'), 600);
+    setTimeout(() => document.getElementById('ep3').classList.add('revealed'), 1000);
+    setTimeout(() => document.getElementById('epWhole').classList.add('revealed'), 1600);
+  }
+});
+
+
+// ──── Count-up animation for data panel ────
+document.querySelectorAll('.data-number[data-count]').forEach(el => {
+  const target = parseInt(el.dataset.count);
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 85%',
+    once: true,
+    onEnter: () => {
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 40));
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        el.textContent = current;
+      }, 30);
+    }
+  });
+});
+
+
+// ──── Project filter ────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (filter === 'all' || card.dataset.tags.includes(filter)) {
+        card.dataset.hidden = 'false';
+        card.style.display = '';
+      } else {
+        card.dataset.hidden = 'true';
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+
+// ──── Map point pulse animation ────
+gsap.utils.toArray('.map-dot-visited, .map-dot-home').forEach(dot => {
+  gsap.to(dot, {
+    attr: { r: parseFloat(dot.getAttribute('r')) + 2 },
+    duration: 1.5,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut'
+  });
+});
+
+</script>
+</body>
+</html>
