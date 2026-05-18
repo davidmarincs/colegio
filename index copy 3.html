@@ -344,7 +344,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   position: relative;
 }
 .scrolly-step {
-  min-height: 40vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   opacity: 0.2;
@@ -754,23 +754,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   opacity: 0;
 }
 .map-line[data-visited] { stroke: var(--emerald); stroke-width: 2; }
-.map-tooltip {
-  position: absolute;
-  background: var(--text-primary);
-  color: #fff;
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-  z-index: 10;
-  max-width: 200px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.map-tooltip.visible { opacity: 1; }
-.map-tooltip strong { display: block; margin-bottom: 0.15rem; }
 .map-legend {
   display: flex;
   gap: 2rem;
@@ -1324,18 +1307,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
 </section>
 
 <!-- ═══════════════════════════════════════
-     HOOK — EL PROBLEMA
-     ═══════════════════════════════════════ -->
-<section style="padding: 4rem 0; background: var(--bg-primary);">
-  <div class="container">
-    <div class="reveal" style="max-width: 650px; margin: 0 auto; text-align: center;">
-      <p style="font-size: 1.6rem; font-family: var(--font-display); color: var(--text-primary); line-height: 1.4; margin-bottom: 1.5rem;">Un colegio. Más de 25 nacionalidades. 1.060 alumnos. Y una pregunta.</p>
-      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">En el barrio de Aluche (Madrid) llevamos 55 años formando personas. En algún momento nos dimos cuenta de que los problemas del mundo real &mdash;el cambio climático, la inteligencia artificial, las migraciones&mdash; no caben en una sola asignatura. Así que cambiamos la forma de enseñar. Y cuando quisimos comprobar si funcionaba, cruzamos fronteras.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
      ACTO 1 — EL ADN
      ═══════════════════════════════════════ -->
 <div class="act-divider act-divider-1" id="act-1">
@@ -1347,8 +1318,8 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem;">Nuestro proyecto pedagógico se inspira en el pensamiento complejo de Edgar Morin: la realidad no se puede entender troceándola en asignaturas aisladas. Los problemas del mundo real &mdash;el cambio climático, las migraciones, la inteligencia artificial&mdash; no pertenecen a una sola disciplina.</p>
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem;">El objetivo no es acumular conocimiento, sino formar personas capaces de <strong>comprender</strong> la realidad compleja y <strong>comprenderse</strong> a sí mismas para encontrar su lugar en el mundo.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En el Colegio Santa Gema Galgani llevamos 55 años educando en el barrio de Aluche (Madrid). Nuestro proyecto pedagógico se inspira en el pensamiento complejo de Edgar Morin: creemos que la realidad no se puede entender troceándola en asignaturas aisladas. Los problemas del mundo real &mdash;el cambio climático, las migraciones, la inteligencia artificial&mdash; no pertenecen a una sola disciplina. Por eso, nuestro modelo conecta las materias entre sí a través de proyectos interdisciplinares y seis grandes preguntas que llamamos <em>vías transdisciplinares</em>.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">El objetivo no es acumular conocimiento, sino formar personas capaces de <strong>comprender</strong> la realidad compleja y <strong>comprenderse</strong> a sí mismas para encontrar su lugar en el mundo.</p>
     </div>
 
     <!-- Elephant parable - Scrollytelling -->
@@ -1370,11 +1341,17 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </div>
           <div class="scrolly-step" data-step="2">
             <div class="step-content">
+              <blockquote>El segundo agarró la cola y creyó que era una <strong>cuerda</strong>.</blockquote>
+              <p>Otra disciplina, otra perspectiva parcial. Sin diálogo entre ellas, cada una queda atrapada en su fragmento.</p>
+            </div>
+          </div>
+          <div class="scrolly-step" data-step="3">
+            <div class="step-content">
               <blockquote>El tercero tocó la trompa y salió corriendo pensando que era una <strong>serpiente</strong>.</blockquote>
               <p>Los tres salieron convencidos de que sabían perfectamente lo que era un elefante. <strong>El pensamiento simple fragmenta.</strong></p>
             </div>
           </div>
-          <div class="scrolly-step" data-step="3">
+          <div class="scrolly-step" data-step="4">
             <div class="step-content">
               <p><strong>El pensamiento complejo conecta.</strong> Nuestro modelo pedagógico forma alumnos que buscan el elefante completo: las conexiones entre disciplinas, entre lo local y lo global, entre el saber y el ser.</p>
               <p>Por eso organizamos el conocimiento en <strong>6 vías transdisciplinares</strong>: lentes que atraviesan todas las asignaturas para ver la realidad entera.</p>
@@ -1550,8 +1527,8 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem;">En 2022, el SEPIE nos concedió la acreditación Erasmus+ en Educación Escolar. No fue un punto de llegada sino de partida: nos permitió contrastar nuestro modelo pedagógico fuera de nuestras paredes. Nos planteamos cuatro objetivos, cada uno formulado como una pregunta.</p>
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem;">Cada movilidad ha sido un intento de responderlas con evidencias: <span style="font-size: 1.3em; font-weight: 700; color: var(--sg-blue-dark);">84</span> alumnos en <span style="font-size: 1.3em; font-weight: 700; color: var(--sg-blue-dark);">9</span> países, <span style="font-size: 1.3em; font-weight: 700; color: var(--sg-blue-dark);">30</span> profesores en experiencias de job shadowing y acompañamiento.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En 2022, el SEPIE concedió a Santa Gema la acreditación Erasmus+ (KA120) en el ámbito de Educación Escolar. No fue un punto de llegada sino de partida: nos permitió sistematizar algo que ya intuíamos &mdash;que nuestro modelo pedagógico transdisciplinar necesitaba ser contrastado fuera de nuestras paredes&mdash;. Desde entonces, nos hemos planteado cuatro objetivos que conectan directamente nuestra pedagogía con la dimensión internacional.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Cada objetivo es, en realidad, una pregunta. Y cada movilidad ha sido un intento de responderla con evidencias: 84 alumnos en 9 países, 30 profesores en experiencias de job shadowing y acompañamiento. Los datos que siguen no son números: son historias de aprendizaje que han transformado cómo enseñamos.</p>
     </div>
 
     <!-- 4 Questions -->
@@ -1621,13 +1598,13 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </g>
 
           <!-- Gourdon, France (visited) -->
-          <g class="map-point" data-tip="<strong>Gourdon, Francia</strong>12 alumnos · Mar 2024<br>Sostenibilidad rural, Jardines Bourdianos">
+          <g class="map-point">
             <circle cx="370" cy="310" r="5" class="map-dot map-dot-visited"/>
             <text x="385" y="308" text-anchor="start" class="map-label">Gourdon</text>
           </g>
 
           <!-- Montpellier, France (visited) -->
-          <g class="map-point" data-tip="<strong>Montpellier, Francia</strong>10 alumnos · Mar 2026<br>Proyecto Karambolage intercultural">
+          <g class="map-point">
             <circle cx="360" cy="330" r="5" class="map-dot map-dot-visited"/>
             <text x="375" y="335" text-anchor="start" class="map-label">Montpellier</text>
           </g>
@@ -1638,31 +1615,31 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </g>
 
           <!-- Genova, Italy (visited) -->
-          <g class="map-point" data-tip="<strong>Génova, Italia</strong>16 alumnos<br>Intercambio cultural italo-español">
+          <g class="map-point">
             <circle cx="440" cy="340" r="5" class="map-dot map-dot-visited"/>
             <text x="448" y="355" text-anchor="start" class="map-label">Génova</text>
           </g>
 
           <!-- Portlaoise, Ireland (visited) -->
-          <g class="map-point" data-tip="<strong>Portlaoise, Irlanda</strong>12 alumnos<br>Inmersión lingüística y cultural">
+          <g class="map-point">
             <circle cx="300" cy="230" r="5" class="map-dot map-dot-visited"/>
             <text x="300" y="220" text-anchor="middle" class="map-label">Portlaoise</text>
           </g>
 
           <!-- Gothenburg, Sweden (visited) -->
-          <g class="map-point" data-tip="<strong>Gotemburgo, Suecia</strong>12 alumnos · Dic 2025<br>From Trash to Trend: moda sostenible">
+          <g class="map-point">
             <circle cx="420" cy="160" r="5" class="map-dot map-dot-visited"/>
             <text x="420" y="150" text-anchor="middle" class="map-label">Gotemburgo</text>
           </g>
 
           <!-- Fürth, Germany (visited) -->
-          <g class="map-point" data-tip="<strong>Fürth, Alemania</strong>12 alumnos<br>Intercambio educativo">
+          <g class="map-point">
             <circle cx="440" cy="250" r="5" class="map-dot map-dot-visited"/>
             <text x="455" y="248" text-anchor="start" class="map-label">Fürth</text>
           </g>
 
           <!-- Ylakiai, Lithuania (visited) -->
-          <g class="map-point" data-tip="<strong>Ylakiai, Lituania</strong>10 alumnos · May 2024<br>Sustainable City, cocina, folklore">
+          <g class="map-point">
             <circle cx="600" cy="180" r="5" class="map-dot map-dot-visited"/>
             <text x="600" y="170" text-anchor="middle" class="map-label">Ylakiai</text>
           </g>
@@ -1818,8 +1795,8 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem;">El currículo de la ESO se organiza en <strong>ámbitos</strong>: STEAM, CLC (cultura y lenguas clásicas), EPSGC (proyectos íntegramente en inglés) y STEM. Cada ámbito trabaja por proyectos interdisciplinares con una pregunta guía, un producto final y una presentación pública.</p>
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem; padding: 1rem; border-left: 3px solid var(--sg-blue); background: var(--sg-blue-bg); border-radius: 0 0.5rem 0.5rem 0;"><strong style="color: var(--text-primary);">Antes de Erasmus</strong>, un proyecto sobre sostenibilidad miraba solo a Aluche. <strong style="color: var(--text-primary);">Después</strong>, los alumnos comparan el reciclaje rural de Gourdon con el urbano de Madrid, la energía en Gotemburgo con la de su barrio, la biodiversidad báltica con la del Retiro.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">En Santa Gema, el currículo de la ESO se organiza en <strong>ámbitos</strong>: STEAM (ciencias, tecnología, ingeniería, arte y matemáticas), CLC (cultura, lenguas clásicas y civilización), EPSGC (English Project Santa Gema &mdash; proyectos íntegramente en inglés) y STEM. Cada ámbito trabaja por unidades que son, en realidad, proyectos interdisciplinares (UBPI) con una pregunta guía, un producto final y una presentación pública.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Lo que hace diferente a estos proyectos es que cada uno está alineado con una de las 6 vías transdisciplinares y, desde que tenemos Erasmus+, también con los ODS y con lo aprendido en las movilidades. Un proyecto sobre sostenibilidad en Aluche ya no se diseña solo desde Madrid: incorpora lo que profesores y alumnos observaron en la Francia rural, en las ciudades bálticas de Lituania o en los talleres de Gotemburgo.</p>
     </div>
 
     <!-- Filters -->
@@ -1920,12 +1897,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
         <h3>Buen Camino, Peregrino</h3>
         <p>El Camino de Santiago como hilo conductor: patrimonio, encuentro entre culturas y búsqueda de sentido a través de la lengua y la literatura clásica.</p>
       </div>
-
-    </div>
-
-    <details class="reveal" style="margin-top: 1.5rem;">
-      <summary style="cursor: pointer; padding: 1rem 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; font-size: 0.9rem; list-style: none; text-align: center;">Ver los 21 proyectos completos &darr;</summary>
-      <div class="projects-grid" style="margin-top: 1rem;">
 
       <!-- 3º ESO -->
       <div class="project-card" data-tags="3eso steam">
@@ -2038,8 +2009,7 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
         <h3>Divergent</h3>
         <p>Inspirado en la distopía: los alumnos cuestionan las etiquetas, los sistemas que clasifican personas y la ética del conocimiento.</p>
       </div>
-      </div>
-    </details>
+    </div>
 
     <!-- Deep dives -->
     <div class="deepdive-section reveal">
@@ -2156,7 +2126,8 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   <div class="container">
 
     <div class="reveal" style="margin-top: 1rem;">
-      <p style="color: var(--text-secondary); max-width: 650px; margin-top: 1rem;">Detrás de los datos hay personas. Alumnos de 14 años que nunca habían salido de España y descubrieron que un chico lituano tiene las mismas dudas sobre su futuro. Profesores que observaron cómo se enseña en una escuela sueca y volvieron con ideas para transformar sus clases. Familias de Aluche que acogieron a estudiantes franceses y descubrieron que la hospitalidad también es una forma de aprender.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Detrás de los datos hay personas. Alumnos de 14 años que nunca habían salido de España y descubrieron que un chico lituano tiene las mismas dudas sobre su futuro. Profesores que observaron cómo se enseña en una escuela sueca y volvieron con ideas para transformar sus clases. Familias de Aluche que acogieron a estudiantes franceses y descubrieron que la hospitalidad también es una forma de aprender.</p>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-top: 1rem;">Entre 2024 y 2026, nuestros alumnos y profesores han viajado a Francia (Gourdon, Montpellier, Clermont-l'Hérault), Lituania (Ylakiai), Italia (Génova), Irlanda (Portlaoise), Suecia (Gotemburgo) y Alemania (Fürth). Y hemos recibido a alumnos lituanos en Madrid. Cada movilidad ha dejado un rastro de aprendizajes que se refleja en cómo diseñamos nuestros proyectos.</p>
     </div>
 
     <!-- Timeline -->
@@ -2177,9 +2148,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </div>
         </div>
       </div>
-      <div style="grid-column: 1 / -1; display: flex; gap: 0.75rem; margin: -1rem 0 2rem; padding-left: 52%;">
-        <img src="assets/img/erasmus/madrid-prado-escalera.jpg" alt="Visita al Prado" style="width: 120px; height: 80px; object-fit: cover; border-radius: 0.5rem;">
-      </div>
 
       <div class="timeline-item">
         <div class="timeline-date">
@@ -2197,10 +2165,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </div>
         </div>
       </div>
-      <div style="grid-column: 1 / -1; display: flex; gap: 0.75rem; margin: -1rem 0 2rem; padding-left: 52%;">
-        <img src="assets/img/erasmus/madrid-toledo-grupo.jpg" alt="Grupo en Toledo" style="width: 120px; height: 80px; object-fit: cover; border-radius: 0.5rem;">
-        <img src="assets/img/erasmus/madrid-retiro-bici.jpg" alt="Retiro en bici" style="width: 120px; height: 80px; object-fit: cover; border-radius: 0.5rem;">
-      </div>
 
       <div class="timeline-item">
         <div class="timeline-date">
@@ -2217,10 +2181,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
             <span class="tl-activity-tag">Diario en Padlet</span>
           </div>
         </div>
-      </div>
-      <div style="grid-column: 1 / -1; display: flex; gap: 0.75rem; margin: -1rem 0 2rem; padding-left: 52%;">
-        <img src="assets/img/erasmus/lituania-anfiteatro.jpg" alt="Anfiteatro Lituania" style="width: 120px; height: 80px; object-fit: cover; border-radius: 0.5rem;">
-        <img src="assets/img/erasmus/lituania-gastronomia.jpg" alt="Cocina lituana" style="width: 120px; height: 80px; object-fit: cover; border-radius: 0.5rem;">
       </div>
     </div>
 
@@ -2244,36 +2204,51 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
       </div>
     </div>
 
-    <!-- Teacher feedback -->
+    <!-- Teacher survey data -->
     <div class="survey-section reveal" style="padding: 3rem 0;">
-      <h2 class="act-title" style="font-size: 1.4rem;">Lo que aprendimos (y lo que mejoraremos)</h2>
-      <p style="color: var(--text-secondary); max-width: 650px; margin-bottom: 2rem;">Las encuestas al profesorado acompañante no solo nos dicen qué salió bien. Nos dicen qué cambiar. Estas son las voces reales de los docentes que cruzaron fronteras con nuestros alumnos.</p>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div style="padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel);">
-          <p style="font-size: 0.7rem; color: var(--emerald); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Lo que funciona</p>
-          <p style="font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">&laquo;The logo contest was not digital: they had to discuss, design, draw and color it as a team. Real communication in the three languages: Spanish, French and English.&raquo;</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted);"><strong style="color: var(--text-primary);">Virginia Rodríguez</strong> &middot; Clermont-l'Hérault, mar 2026</p>
+      <h2 class="act-title" style="font-size: 1.4rem;">Lo que dicen las encuestas</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">Evaluación del profesorado participante en movilidades Erasmus+ (escala 1-5)</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
+        <div class="data-card" style="padding: 1.5rem;">
+          <div class="data-number" style="color: var(--emerald); font-size: 2.2rem;" data-count="5">0</div>
+          <div class="data-label">Organización<br>general</div>
+          <div style="height: 4px; background: var(--emerald); border-radius: 2px; margin-top: 0.5rem; width: 100%;"></div>
         </div>
-        <div style="padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel);">
-          <p style="font-size: 0.7rem; color: var(--emerald); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Lo que funciona</p>
-          <p style="font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">&laquo;Spanish and French students worked together to create videos for the Karambolage project. At first it was difficult, but once they began working, they shared ideas and solved small problems together.&raquo;</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted);"><strong style="color: var(--text-primary);">Arturo Chacón</strong> &middot; Montpellier, mar 2026</p>
+        <div class="data-card" style="padding: 1.5rem;">
+          <div class="data-number" style="color: var(--cyan); font-size: 2.2rem;" data-count="5">0</div>
+          <div class="data-label">Alineación con<br>objetivos del proyecto</div>
+          <div style="height: 4px; background: var(--cyan); border-radius: 2px; margin-top: 0.5rem; width: 100%;"></div>
         </div>
-        <div style="padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel); border-left: 3px solid var(--amber);">
-          <p style="font-size: 0.7rem; color: var(--amber); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Lo que mejoraremos</p>
-          <p style="font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">&laquo;Siento que no hemos tenido la misma acogida en su centro que cuando ellos vinieron. Los profesores tuvimos momentos vacíos, sin actividad concreta. Se puede mostrar más el funcionamiento de los sistemas educativos.&raquo;</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted);"><strong style="color: var(--text-primary);">María Isabel Téllez</strong> &middot; Gotemburgo, dic 2025</p>
+        <div class="data-card" style="padding: 1.5rem;">
+          <div class="data-number" style="color: var(--violet); font-size: 2.2rem;" data-count="5">0</div>
+          <div class="data-label">Promoción de<br>valores europeos</div>
+          <div style="height: 4px; background: var(--violet); border-radius: 2px; margin-top: 0.5rem; width: 100%;"></div>
         </div>
-        <div style="padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel); border-left: 3px solid var(--amber);">
-          <p style="font-size: 0.7rem; color: var(--amber); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Lo que mejoraremos</p>
-          <p style="font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">&laquo;Some students found it difficult at first to work in mixed groups. They preferred to use their own language. However, little by little they improved and worked together better.&raquo;</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted);"><strong style="color: var(--text-primary);">Arturo Chacón</strong> &middot; Montpellier, mar 2026</p>
+        <div class="data-card" style="padding: 1.5rem;">
+          <div style="font-family: var(--font-body); font-size: 2.2rem; font-weight: 700; color: var(--amber); line-height: 1; margin-bottom: 0.3rem;">100%</div>
+          <div class="data-label">Repetiría como<br>profesor acompañante</div>
+          <div style="height: 4px; background: var(--amber); border-radius: 2px; margin-top: 0.5rem; width: 100%;"></div>
         </div>
       </div>
-
-      <div style="margin-top: 1.5rem; padding: 1rem 1.5rem; border-radius: 1rem; background: var(--sg-blue-bg); text-align: center;">
-        <p style="font-size: 0.85rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">100%</strong> del profesorado participante repetiría como acompañante Erasmus+ &middot; Competencias más desarrolladas: <strong>comunicación</strong>, <strong>conciencia intercultural</strong>, <strong>autonomía</strong></p>
+      <div style="margin-top: 2rem; padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel);">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Competencias más desarrolladas por los alumnos (según profesorado)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="padding: 0.4rem 0.8rem; border-radius: 0.5rem; background: var(--cyan-dim); color: var(--cyan); font-size: 0.85rem;">Comunicación</span>
+          <span style="padding: 0.4rem 0.8rem; border-radius: 0.5rem; background: var(--violet-dim); color: var(--violet); font-size: 0.85rem;">Conciencia intercultural</span>
+          <span style="padding: 0.4rem 0.8rem; border-radius: 0.5rem; background: var(--emerald-dim); color: var(--emerald); font-size: 0.85rem;">Autonomía</span>
+          <span style="padding: 0.4rem 0.8rem; border-radius: 0.5rem; background: var(--amber-dim); color: var(--amber); font-size: 0.85rem;">Responsabilidad</span>
+          <span style="padding: 0.4rem 0.8rem; border-radius: 0.5rem; background: var(--rose-dim); color: var(--rose); font-size: 0.85rem;">Competencia lingüística</span>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel);">
+          <p style="font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">&laquo;The logo contest was not a digital one: they had to discuss, design, draw and color it, as a team. Real communication in the three languages.&raquo;</p>
+          <p style="font-size: 0.8rem; color: var(--text-muted);"><strong style="color: var(--text-primary);">Virginia Rodríguez</strong> &middot; Clermont-l'Hérault</p>
+        </div>
+        <div style="padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--ring); background: var(--bg-panel);">
+          <p style="font-family: var(--font-display); font-style: italic; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;">&laquo;Spanish and French students worked together to create videos for the Karambolage project. It was a good example of teamwork, language practice, and intercultural learning.&raquo;</p>
+          <p style="font-size: 0.8rem; color: var(--text-muted);"><strong style="color: var(--text-primary);">Arturo Chacón</strong> &middot; Montpellier</p>
+        </div>
       </div>
     </div>
 
@@ -2364,31 +2339,6 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     LO QUE HEMOS APRENDIDO
-     ═══════════════════════════════════════ -->
-<section style="padding: 4rem 0; background: var(--bg-primary);">
-  <div class="container">
-    <div class="reveal" style="max-width: 650px;">
-      <h2 class="act-title" style="font-size: 1.5rem;">Lo que hemos aprendido</h2>
-      <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem;">
-        <div style="display: flex; gap: 1rem; align-items: start;">
-          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--sg-blue-bg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--sg-blue-dark); font-size: 0.85rem;">1</span>
-          <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">La transdisciplinariedad funciona mejor cuando se contrasta.</strong> Nuestro modelo pedagógico se ha enriquecido al confrontarlo con otros sistemas educativos europeos. Lo que parecía obvio desde Madrid dejó de serlo en Ylakiai o en Gourdon.</p>
-        </div>
-        <div style="display: flex; gap: 1rem; align-items: start;">
-          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--sg-blue-bg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--sg-blue-dark); font-size: 0.85rem;">2</span>
-          <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">La inclusión no es un objetivo aparte: es una consecuencia de cruzar fronteras.</strong> Cuando un alumno de Aluche convive una semana con una familia lituana, la ciudadanía europea deja de ser un concepto y se convierte en una experiencia vivida.</p>
-        </div>
-        <div style="display: flex; gap: 1rem; align-items: start;">
-          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--sg-blue-bg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--sg-blue-dark); font-size: 0.85rem;">3</span>
-          <p style="color: var(--text-secondary);"><strong style="color: var(--text-primary);">Los alumnos que viajan no solo aprenden más: enseñan más cuando vuelven.</strong> Cada movilidad revierte en el diseño de nuevos proyectos para todo el alumnado. 84 alumnos viajaron, pero 1.060 se benefician de lo que trajeron.</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -2605,14 +2555,14 @@ document.querySelectorAll('.reveal').forEach(el => {
     steps.forEach(s => s.classList.remove('is-active'));
     steps[i].classList.add('is-active');
 
-    // Step 0: columna (legs)
-    // Step 1: cuerda (tail)
-    // Step 2: serpiente (trunk+head)
-    // Step 3: body + pensamiento complejo
-    if (i >= 0) { parts[0].classList.add('revealed'); labels[0].classList.add('revealed'); }
-    if (i >= 1) { parts[1].classList.add('revealed'); labels[1].classList.add('revealed'); }
-    if (i >= 2) { parts[2].classList.add('revealed'); labels[2].classList.add('revealed'); }
-    if (i >= 3) {
+    // Step 0: intro text only
+    // Step 1: legs (columnas) appear
+    // Step 2: tail (cuerda) appears
+    // Step 3: trunk+head (serpiente) + body + result text
+    if (i >= 1) { parts[0].classList.add('revealed'); labels[0].classList.add('revealed'); }
+    if (i >= 2) { parts[1].classList.add('revealed'); labels[1].classList.add('revealed'); }
+    if (i >= 3) { parts[2].classList.add('revealed'); labels[2].classList.add('revealed'); }
+    if (i >= 4) {
       body.classList.add('revealed');
       bodyOutline.classList.add('revealed');
       setTimeout(() => whole.classList.add('revealed'), 500);
@@ -2621,9 +2571,9 @@ document.querySelectorAll('.reveal').forEach(el => {
       bodyOutline.classList.remove('revealed');
       whole.classList.remove('revealed');
     }
-    if (i < 0) { parts[0].classList.remove('revealed'); labels[0].classList.remove('revealed'); }
-    if (i < 1) { parts[1].classList.remove('revealed'); labels[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
-    if (i < 2) { parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
+    if (i < 1) { parts[0].classList.remove('revealed'); labels[0].classList.remove('revealed'); parts[1].classList.remove('revealed'); labels[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
+    if (i < 2) { parts[1].classList.remove('revealed'); labels[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
+    if (i < 3) { parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
   }
 })();
 
@@ -2803,33 +2753,6 @@ gsap.utils.toArray('.partner-card').forEach((card, i) => {
     }
   );
 });
-
-
-// ══════════════════════════════════════
-// Map tooltips
-// ══════════════════════════════════════
-(function initMapTooltips() {
-  const container = document.querySelector('.map-container');
-  if (!container) return;
-  const tooltip = document.createElement('div');
-  tooltip.className = 'map-tooltip';
-  container.appendChild(tooltip);
-
-  container.querySelectorAll('.map-point[data-tip]').forEach(point => {
-    point.addEventListener('mouseenter', (e) => {
-      tooltip.innerHTML = point.dataset.tip;
-      tooltip.classList.add('visible');
-    });
-    point.addEventListener('mousemove', (e) => {
-      const rect = container.getBoundingClientRect();
-      tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
-      tooltip.style.top = (e.clientY - rect.top - 10) + 'px';
-    });
-    point.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('visible');
-    });
-  });
-})();
 
 </script>
 </body>
