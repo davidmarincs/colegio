@@ -387,47 +387,47 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
   justify-content: center;
   gap: 1.5rem;
 }
-/* SVG Elephant parts */
-.elephant-svg-wrap {
+.elephant-parts-row {
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.elephant-part {
+  padding: 0.8rem 1.3rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--ring);
+  background: var(--bg-card);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: all 0.8s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.elephant-part.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: var(--sg-blue);
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(90, 155, 181, 0.15);
+}
+.elephant-whole {
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sg-blue-bg), transparent 70%);
+  border: 2px solid var(--sg-blue);
+  display: flex;
   align-items: center;
-}
-.elephant-svg { width: 260px; height: 200px; }
-.e-part {
-  fill: none;
-  stroke: var(--sg-blue);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-.e-part.revealed { opacity: 1; }
-.e-body-fill {
-  fill: var(--sg-blue-bg);
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-.e-body-fill.revealed { opacity: 1; }
-.e-label {
-  font-family: var(--font-body);
-  font-size: 8.5px;
-  fill: var(--sg-blue-dark);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-.e-label.revealed { opacity: 0.7; }
-.elephant-result-text {
+  justify-content: center;
   font-family: var(--font-display);
   font-size: 1.1rem;
-  color: var(--sg-blue-dark);
+  color: var(--cyan);
   text-align: center;
-  margin-top: 1rem;
   opacity: 0;
-  transition: opacity 1s ease;
+  transform: scale(0.3);
+  transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.elephant-result-text.revealed { opacity: 1; }
+.elephant-whole.revealed { opacity: 1; transform: scale(1); }
 
 .elephant-text blockquote {
   font-family: var(--font-display);
@@ -1341,17 +1341,11 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </div>
           <div class="scrolly-step" data-step="2">
             <div class="step-content">
-              <blockquote>El segundo agarró la cola y creyó que era una <strong>cuerda</strong>.</blockquote>
-              <p>Otra disciplina, otra perspectiva parcial. Sin diálogo entre ellas, cada una queda atrapada en su fragmento.</p>
-            </div>
-          </div>
-          <div class="scrolly-step" data-step="3">
-            <div class="step-content">
               <blockquote>El tercero tocó la trompa y salió corriendo pensando que era una <strong>serpiente</strong>.</blockquote>
               <p>Los tres salieron convencidos de que sabían perfectamente lo que era un elefante. <strong>El pensamiento simple fragmenta.</strong></p>
             </div>
           </div>
-          <div class="scrolly-step" data-step="4">
+          <div class="scrolly-step" data-step="3">
             <div class="step-content">
               <p><strong>El pensamiento complejo conecta.</strong> Nuestro modelo pedagógico forma alumnos que buscan el elefante completo: las conexiones entre disciplinas, entre lo local y lo global, entre el saber y el ser.</p>
               <p>Por eso organizamos el conocimiento en <strong>6 vías transdisciplinares</strong>: lentes que atraviesan todas las asignaturas para ver la realidad entera.</p>
@@ -1359,51 +1353,12 @@ a { color: var(--sg-blue-dark); text-decoration: none; }
           </div>
         </div>
         <div class="scrolly-visual">
-          <div class="elephant-svg-wrap">
-            <svg class="elephant-svg" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
-              <!-- Body fill (appears last) -->
-              <ellipse class="e-body-fill" id="eBody" cx="130" cy="110" rx="70" ry="50"/>
-
-              <!-- Part 1: Legs = "columnas" -->
-              <g class="e-part" id="ep1">
-                <line x1="90" y1="140" x2="90" y2="185"/>
-                <line x1="110" y1="145" x2="110" y2="185"/>
-                <line x1="150" y1="145" x2="150" y2="185"/>
-                <line x1="170" y1="140" x2="170" y2="185"/>
-                <!-- feet -->
-                <ellipse cx="90" cy="187" rx="6" ry="3"/>
-                <ellipse cx="110" cy="187" rx="6" ry="3"/>
-                <ellipse cx="150" cy="187" rx="6" ry="3"/>
-                <ellipse cx="170" cy="187" rx="6" ry="3"/>
-              </g>
-              <text class="e-label" id="eLabel1" x="130" y="198">&laquo;columnas&raquo;</text>
-
-              <!-- Part 2: Tail = "cuerda" -->
-              <g class="e-part" id="ep2">
-                <path d="M200,115 Q215,105 210,95 Q205,85 215,80" fill="none"/>
-                <circle cx="216" cy="78" r="2.5" fill="none"/>
-              </g>
-              <text class="e-label" id="eLabel2" x="225" y="95">&laquo;cuerda&raquo;</text>
-
-              <!-- Part 3: Trunk = "serpiente" -->
-              <g class="e-part" id="ep3">
-                <path d="M62,95 Q45,80 40,60 Q38,45 45,35 Q50,28 55,32" fill="none"/>
-                <!-- Head -->
-                <ellipse cx="65" cy="85" rx="18" ry="22" fill="none"/>
-                <!-- Ear -->
-                <path d="M50,72 Q35,65 42,80" fill="none"/>
-                <!-- Eye -->
-                <circle cx="60" cy="78" r="2.5" fill="var(--sg-blue)"/>
-                <!-- Tusk -->
-                <path d="M58,98 Q55,108 60,112" fill="none"/>
-              </g>
-              <text class="e-label" id="eLabel3" x="38" y="22">&laquo;serpiente&raquo;</text>
-
-              <!-- Body outline (appears with body fill) -->
-              <ellipse class="e-part" id="eBodyOutline" cx="130" cy="110" rx="70" ry="50" fill="none"/>
-            </svg>
-            <div class="elephant-result-text" id="epWhole">Pensamiento complejo</div>
+          <div class="elephant-parts-row">
+            <div class="elephant-part" id="ep1">&laquo;Columna&raquo;</div>
+            <div class="elephant-part" id="ep2">&laquo;Cuerda&raquo;</div>
+            <div class="elephant-part" id="ep3">&laquo;Serpiente&raquo;</div>
           </div>
+          <div class="elephant-whole" id="epWhole">Pensamiento<br>complejo</div>
         </div>
       </div>
     </div>
@@ -2530,13 +2485,6 @@ document.querySelectorAll('.reveal').forEach(el => {
     document.getElementById('ep2'),
     document.getElementById('ep3')
   ];
-  const labels = [
-    document.getElementById('eLabel1'),
-    document.getElementById('eLabel2'),
-    document.getElementById('eLabel3')
-  ];
-  const body = document.getElementById('eBody');
-  const bodyOutline = document.getElementById('eBodyOutline');
   const whole = document.getElementById('epWhole');
 
   steps.forEach((step, i) => {
@@ -2555,25 +2503,21 @@ document.querySelectorAll('.reveal').forEach(el => {
     steps.forEach(s => s.classList.remove('is-active'));
     steps[i].classList.add('is-active');
 
-    // Step 0: intro text only
-    // Step 1: legs (columnas) appear
-    // Step 2: tail (cuerda) appears
-    // Step 3: trunk+head (serpiente) + body + result text
-    if (i >= 1) { parts[0].classList.add('revealed'); labels[0].classList.add('revealed'); }
-    if (i >= 2) { parts[1].classList.add('revealed'); labels[1].classList.add('revealed'); }
-    if (i >= 3) { parts[2].classList.add('revealed'); labels[2].classList.add('revealed'); }
-    if (i >= 4) {
-      body.classList.add('revealed');
-      bodyOutline.classList.add('revealed');
-      setTimeout(() => whole.classList.add('revealed'), 500);
+    // Step 0: just text, no visual yet
+    // Step 1: columna appears
+    // Step 2: cuerda appears
+    // Step 3: serpiente + whole
+    if (i >= 1) parts[0].classList.add('revealed');
+    if (i >= 2) parts[1].classList.add('revealed');
+    if (i >= 3) {
+      parts[2].classList.add('revealed');
+      setTimeout(() => whole.classList.add('revealed'), 400);
     } else {
-      body.classList.remove('revealed');
-      bodyOutline.classList.remove('revealed');
       whole.classList.remove('revealed');
     }
-    if (i < 1) { parts[0].classList.remove('revealed'); labels[0].classList.remove('revealed'); parts[1].classList.remove('revealed'); labels[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
-    if (i < 2) { parts[1].classList.remove('revealed'); labels[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
-    if (i < 3) { parts[2].classList.remove('revealed'); labels[2].classList.remove('revealed'); }
+    if (i < 1) { parts[0].classList.remove('revealed'); parts[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); }
+    if (i < 2) { parts[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); }
+    if (i < 3) { parts[2].classList.remove('revealed'); }
   }
 })();
 
