@@ -2453,7 +2453,7 @@ document.querySelectorAll('.reveal').forEach(el => {
   gsap.fromTo(el,
     { opacity: 0, y: 50 },
     { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 15%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 15%', once: true }
     }
   );
 });
@@ -2487,18 +2487,21 @@ document.querySelectorAll('.reveal').forEach(el => {
     steps.forEach(s => s.classList.remove('is-active'));
     steps[i].classList.add('is-active');
 
-    // Reveal visual elements based on step
-    if (i >= 0) parts[0].classList.add('revealed');
-    if (i >= 1) parts[1].classList.add('revealed');
-    if (i >= 2) parts[2].classList.add('revealed');
+    // Step 0: just text, no visual yet
+    // Step 1: columna appears
+    // Step 2: cuerda appears
+    // Step 3: serpiente + whole
+    if (i >= 1) parts[0].classList.add('revealed');
+    if (i >= 2) parts[1].classList.add('revealed');
     if (i >= 3) {
-      whole.classList.add('revealed');
+      parts[2].classList.add('revealed');
+      setTimeout(() => whole.classList.add('revealed'), 400);
     } else {
       whole.classList.remove('revealed');
     }
-    // Remove unreached parts
-    if (i < 1) { parts[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); }
-    if (i < 2) { parts[2].classList.remove('revealed'); }
+    if (i < 1) { parts[0].classList.remove('revealed'); parts[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); }
+    if (i < 2) { parts[1].classList.remove('revealed'); parts[2].classList.remove('revealed'); }
+    if (i < 3) { parts[2].classList.remove('revealed'); }
   }
 })();
 
@@ -2584,7 +2587,7 @@ document.querySelectorAll('.timeline-item').forEach((item, i) => {
   gsap.fromTo(item,
     { opacity: 0, x: i % 2 === 0 ? -30 : 30 },
     { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: item, start: 'top 75%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: item, start: 'top 75%', end: 'top 10%', once: true }
     }
   );
 });
@@ -2624,7 +2627,7 @@ gsap.utils.toArray('.via-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, y: 40, rotateX: 5 },
     { opacity: 1, y: 0, rotateX: 0, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
-      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', once: true }
     }
   );
 });
@@ -2634,7 +2637,7 @@ gsap.utils.toArray('.profile-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, y: 30, scale: 0.9 },
     { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: i * 0.15, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', once: true }
     }
   );
 });
@@ -2644,7 +2647,7 @@ gsap.utils.toArray('.deepdive').forEach((dd, i) => {
   gsap.fromTo(dd,
     { opacity: 0, y: 60 },
     { opacity: 1, y: 0, duration: 0.8, delay: i * 0.15, ease: 'power2.out',
-      scrollTrigger: { trigger: dd, start: 'top 80%', end: 'top 5%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: dd, start: 'top 80%', end: 'top 5%', once: true }
     }
   );
 });
@@ -2654,7 +2657,7 @@ gsap.utils.toArray('.question-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, y: 30, scale: 0.95 },
     { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: i * 0.12, ease: 'power2.out',
-      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 10%', once: true }
     }
   );
 });
@@ -2664,7 +2667,7 @@ gsap.utils.toArray('.gallery-item').forEach((item, i) => {
   gsap.fromTo(item,
     { opacity: 0, y: 40, scale: 0.9 },
     { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
-      scrollTrigger: { trigger: item, start: 'top 90%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: item, start: 'top 90%', end: 'top 10%', once: true }
     }
   );
 });
@@ -2674,7 +2677,7 @@ gsap.utils.toArray('.partner-card').forEach((card, i) => {
   gsap.fromTo(card,
     { opacity: 0, x: -20 },
     { opacity: 1, x: 0, duration: 0.4, delay: i * 0.08, ease: 'power2.out',
-      scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 10%', toggleActions: 'play reverse play reverse' }
+      scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 10%', once: true }
     }
   );
 });
